@@ -1,0 +1,35 @@
+
+name: Rappel islamique quotidien
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generer-rappel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperer le depot
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generer le rappel du jour
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python rappel_quotidien.py
+
+      - name: Garder le rappel pour validation
+        uses: actions/upload-artifact@v4
+        with:
+          name: rappel-islamique-du-jour
+          path: rappels/
+          if-no-files-found: error
+          retention-days: 7
