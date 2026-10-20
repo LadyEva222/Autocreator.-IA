@@ -1,0 +1,59 @@
+from datetime import datetime
+from pathlib import Path
+import os
+import json
+import urllib.request
+
+API_KEY = os.environ.get("OPENAI_API_KEY")
+
+def generer_rappel():
+    if not API_KEY:
+        raise RuntimeError("La clé API OpenAI manque dans les secrets GitHub.")
+
+    prompt = (
+        "Écris un rappel islamique original en français, "
+        "doux et apaisant, pour une vidéo verticale de 45 à 60 secondes. "
+        "Ton respectueux, sans jugement, sans inventer de versets ou de hadiths. "
+        "Retourne uniquement le texte à lire à voix haute."
+    )
+
+    data = json.dumps({
+        "model": "gpt-4.1-mini",
+        "input": prompt
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://api.openai.com/v1/responses",
+        data=data,
+        headers={
+            "Authorization": f"Bearer {API_KEY}",
+            "Content-Type": "application/json"
+        }
+    )
+
+    with urllib.request.urlopen(req, timeout=60) as response:
+        result = json.loads(response.read().decode("utf-8"))
+
+    texte = "\n".join(
+        item["text"]
+        for item in result.get("output", [])
+        if item.get("type") == "message"
+        for item in item.get("content", [])
+        if item.get("type") == "output_text"
+    )
+
+    if not texte.strip():
+        raise RuntimeError("Aucun texte n'a été généré.")
+
+    dossier = Path("rappels")
+    dossier.mkdir(exist_ok=True)
+
+    date = datetime.now().strftime("%Y-%m-%d")
+    fichier = dossier / f"rappel-{date}.txt"
+    fichier.write_text(texte, encoding="utf-8")
+
+    print(f"Rappel créé : {fichier}")
+    print(texte)
+
+if __name__ == "__main__":
+    generer_rappel()
