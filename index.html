@@ -1,164 +1,48 @@
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AutoCreator AI</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#f5f3fc;color:#24213b;font-family:Arial,sans-serif}
-header{background:#211b3b;color:white;padding:24px 18px}
-header h1{margin:0 0 8px;font-size:26px}
-header p{margin:0;color:#ded7ff}
-main{max-width:750px;margin:auto;padding:16px}
-.card{background:white;border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 3px 14px #211b3b0d}
-h2{font-size:19px;margin-top:0}
-label{display:block;font-weight:bold;margin:12px 0 7px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #d7d2e6;border-radius:9px;font-size:16px;background:white}
-button{border:0;border-radius:10px;padding:13px 16px;background:#6d55d9;color:white;font-size:15px;font-weight:bold;cursor:pointer}
-.secondary{background:#eeeafd;color:#44368b}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat div{background:#eeeafd;padding:14px;border-radius:12px}
-.small{font-size:13px;color:#77718e;line-height:1.5}
-nav{display:flex;gap:7px;overflow:auto;padding:10px 0}
-nav button{white-space:nowrap;padding:10px;font-size:13px}
-.view{display:none}.view.active{display:block}
-.item{border-bottom:1px solid #eee;padding:12px 0}
-footer{text-align:center;padding:20px;color:#77718e;font-size:12px}
-</style>
-</head>
-<body>
-<header>
-<h1>✨ AutoCreator AI</h1>
-<p>Ton studio de rappels islamiques</p>
-<p style="margin-top:14px;font-size:13px">MODE PROTOTYPE · Validation obligatoire</p>
-</header>
-<main>
-<nav>
-<button onclick="show('home')">Accueil</button>
-<button onclick="show('create')">Créer</button>
-<button onclick="show('calendar')">Calendrier</button>
-<button onclick="show('history')">Historique</button>
-<button onclick="show('accounts')">Mes réseaux</button>
-</nav>
-
-<section id="home" class="view active">
-<div class="card">
-<h2>Bienvenue dans ton studio 🌙</h2>
-<p>Prépare un rappel islamique chaque jour, vérifie-le, puis publie-le lorsque tes comptes seront connectés.</p>
-<div class="stat">
-<div><strong id="count">0</strong><br>Projets créés</div>
-<div><strong id="pending">0</strong><br>À valider</div>
-</div>
-<div class="actions"><button onclick="show('create')">＋ Créer une vidéo</button></div>
-</div>
-<div class="card">
-<h2>Comment ça marche ?</h2>
-<p>① Choisis un thème</p><p>② Prépare ton script</p><p>③ Vérifie le contenu</p><p>④ Connecte tes réseaux pour envisager la publication</p>
-<p class="small">Cette version ne génère pas encore de fichier vidéo et ne publie rien sur les réseaux.</p>
-</div>
-</section>
-
-<section id="create" class="view">
-<div class="card">
-<h2>Créer un rappel islamique</h2>
-<label for="title">Titre</label>
-<input id="title" value="Le pouvoir de dire Alhamdoulillah">
-<label for="topic">Thème</label>
-<select id="topic">
-<option>Gratitude envers Allah</option>
-<option>La prière</option>
-<option>La patience dans les épreuves</option>
-<option>Le repentir</option>
-<option>Le respect des parents</option>
-<option>Enseignements du Coran</option>
-<option>Rappel du vendredi</option>
-</select>
-<label for="duration">Durée souhaitée</label>
-<select id="duration"><option>30 secondes</option><option selected>45 secondes</option><option>60 secondes</option></select>
-<label for="script">Script du rappel</label>
-<textarea id="script" rows="6">Prenons un instant pour remercier Allah pour la vie, chaque nouvelle journée et les occasions de faire le bien. Que nos cœurs restent reconnaissants et que nos actions reflètent cette gratitude.</textarea>
-<div class="actions">
-<button onclick="prepare()">Préparer le projet</button>
-<button class="secondary" onclick="document.getElementById('script').value=''">Effacer le script</button>
-</div>
-<p id="notice" class="small">Relis le texte et vérifie les références religieuses avant toute publication.</p>
-<div id="preview"></div>
-</div>
-</section>
-
-<section id="calendar" class="view">
-<div class="card">
-<h2>Calendrier éditorial</h2>
-<label for="time">Heure souhaitée</label>
-<select id="time"><option>12:00</option><option>15:00</option><option selected>18:00</option><option>20:00</option><option>21:00</option></select>
-<label for="frequency">Fréquence</label>
-<input id="frequency" value="1 vidéo par jour" readonly>
-<button onclick="saveTime()">Enregistrer la préférence</button>
-<p id="timeNotice" class="small">L'horaire est indicatif. Aucune publication programmée n'est déclenchée par cette maquette.</p>
-</div>
-</section>
-
-<section id="history" class="view">
-<div class="card"><h2>Historique des projets</h2><div id="items">Aucun projet pour le moment.</div></div>
-</section>
-
-<section id="accounts" class="view">
-<div class="card">
-<h2>Connexion officielle</h2>
-<p>Les comptes ne sont pas connectés dans cette version.</p>
-<div class="item"><strong>YouTube</strong><p class="small">Une intégration OAuth et l'API YouTube seront nécessaires.</p><a href="https://developers.google.com/youtube/v3/guides/authentication">Documentation officielle YouTube</a></div>
-<div class="item"><strong>TikTok</strong><p class="small">Une application développeur et les autorisations de publication seront nécessaires.</p><a href="https://developers.tiktok.com/doc/content-posting-api-get-started/">Documentation officielle TikTok</a></div>
-<p class="small">Ne saisis jamais tes mots de passe dans cette page. Les connexions devront passer par les systèmes officiels.</p>
-</div>
-</section>
-<footer>AutoCreator AI · Prototype local · Les projets ne sont pas encore enregistrés en ligne.</footer>
-</main>
-<script>
-let projects=[];
-function show(id){
-document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
-function prepare(){
-const title=document.getElementById('title').value.trim();
-const topic=document.getElementById('topic').value;
-const script=document.getElementById('script').value.trim();
-if(!title||!script){alert('Ajoute un titre et un script.');return;}
-projects.unshift({title,topic,script,status:'À valider'});
-document.getElementById('preview').innerHTML='';
-const box=document.createElement('div');
-box.className='card';
-const heading=document.createElement('h2');heading.textContent=title;box.appendChild(heading);
-const desc=document.createElement('p');desc.textContent='Thème : '+topic;box.appendChild(desc);
-const text=document.createElement('p');text.textContent=script;box.appendChild(text);
-const status=document.createElement('p');status.className='small';status.textContent='Brouillon à vérifier';box.appendChild(status);
-const btn=document.createElement('button');btn.textContent='Je valide ce script';btn.onclick=()=>{
-projects[0].status='Script validé';
-status.textContent='Script validé par toi. Aucune vidéo réelle n’a été créée ou publiée.';
-btn.disabled=true;render();
-};box.appendChild(btn);
-document.getElementById('preview').appendChild(box);
-document.getElementById('notice').textContent='Projet préparé. Vérifie le texte avant de le valider.';
-render();
-}
-function render(){
-document.getElementById('count').textContent=projects.length;
-document.getElementById('pending').textContent=projects.filter(p=>p.status==='À valider').length;
-const items=document.getElementById('items');items.innerHTML='';
-if(!projects.length){items.textContent='Aucun projet pour le moment.';return;}
-projects.forEach(p=>{
-const div=document.createElement('div');div.className='item';
-const strong=document.createElement('strong');strong.textContent=p.title;div.appendChild(strong);
-const detail=document.createElement('p');detail.textContent=p.topic+' · '+p.status;div.appendChild(detail);
-items.appendChild(div);
-});
-}
-function saveTime(){
-document.getElementById('timeNotice').textContent='Préférence choisie : '+document.getElementById('time').value+'. Elle reste dans cette session et ne programme aucune publication réelle.';
-}
-</script>
-</body>
-</html>
+<!DOCTYPE html>  <html lang="fr">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title>AutoCreator AI</title>  
+<style>  
+*{box-sizing:border-box}body{margin:0;background:#f5f3fc;color:#24213b;font-family:Arial,sans-serif}  
+header{background:#211b3b;color:white;padding:24px 18px}header h1{margin:0 0 8px;font-size:26px}header p{margin:0;color:#ded7ff}  
+main{max-width:750px;margin:auto;padding:16px}.card{background:white;border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 3px 14px #211b3b0d}  
+h2{font-size:19px;margin-top:0}label{display:block;font-weight:bold;margin:12px 0 7px}  
+input,select,textarea{width:100%;padding:12px;border:1px solid #d7d2e6;border-radius:9px;font-size:16px;background:white}  
+button{border:0;border-radius:10px;padding:13px 16px;background:#6d55d9;color:white;font-size:15px;font-weight:bold;cursor:pointer}button:disabled{opacity:.55}  
+.secondary{background:#eeeafd;color:#44368b}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}  
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat div{background:#eeeafd;padding:14px;border-radius:12px}  
+.small{font-size:13px;color:#77718e;line-height:1.5}nav{display:flex;gap:7px;overflow:auto;padding:10px 0}nav button{white-space:nowrap;padding:10px;font-size:13px}  
+.view{display:none}.view.active{display:block}.item{border-bottom:1px solid #eee;padding:12px 0}footer{text-align:center;padding:20px;color:#77718e;font-size:12px}  
+video{width:100%;max-width:420px;background:#17132c;border-radius:12px;display:block;margin-top:12px}a{color:#5941bd}  
+</style>  
+</head>  
+<body>  
+<header><h1>✨ AutoCreator AI</h1><p>Ton studio de rappels islamiques</p><p style="margin-top:14px;font-size:13px">PROTOTYPE AMÉLIORÉ · Validation obligatoire</p></header>  
+<main>  
+<nav><button onclick="show('home')">Accueil</button><button onclick="show('create')">Créer</button><button onclick="show('calendar')">Calendrier</button><button onclick="show('history')">Historique</button><button onclick="show('accounts')">Mes réseaux</button></nav>  
+<section id="home" class="view active"><div class="card"><h2>Bienvenue dans ton studio 🌙</h2><p>Prépare un rappel islamique, vérifie-le, puis valide-le avant de créer une vidéo téléchargeable.</p><div class="stat"><div><strong id="count">0</strong><br>Projets enregistrés</div><div><strong id="pending">0</strong><br>À valider</div></div><div class="actions"><button onclick="show('create')">＋ Créer une vidéo</button></div></div><div class="card"><h2>Comment ça marche ?</h2><p>① Choisis un thème et relis le texte.</p><p>② Valide toi-même le script.</p><p>③ Génère et télécharge la vidéo animée.</p><p>④ Publie manuellement sur tes réseaux après vérification.</p><p class="small">Cette version crée une vidéo simple avec texte animé. Elle n'ajoute pas encore de voix, de photos/vidéos externes ni de publication automatique.</p></div></section>  
+<section id="create" class="view"><div class="card"><h2>Créer un rappel islamique</h2><label for="title">Titre</label><input id="title" value="Le pouvoir de dire Alhamdoulillah"><label for="topic">Thème</label><select id="topic"><option>Gratitude envers Allah</option><option>La prière</option><option>La patience dans les épreuves</option><option>Le repentir</option><option>Le respect des parents</option><option>Enseignements du Coran</option><option>Rappel du vendredi</option></select><label for="duration">Durée souhaitée</label><select id="duration"><option value="30">30 secondes</option><option value="45" selected>45 secondes</option><option value="60">60 secondes</option></select><label for="script">Script du rappel</label><textarea id="script" rows="6">Prenons un instant pour remercier Allah pour la vie, chaque nouvelle journée et les occasions de faire le bien. Que nos cœurs restent reconnaissants et que nos actions reflètent cette gratitude.</textarea><div class="actions"><button onclick="prepare()">Préparer le projet</button><button class="secondary" onclick="clearScript()">Effacer le script</button></div><p id="notice" class="small">Relis le texte et vérifie les références religieuses avant toute publication.</p><div id="preview"></div></div></section>  
+<section id="calendar" class="view"><div class="card"><h2>Calendrier éditorial</h2><label for="time">Heure souhaitée</label><select id="time"><option>12:00</option><option>15:00</option><option selected>18:00</option><option>20:00</option><option>21:00</option></select><label for="frequency">Fréquence</label><input id="frequency" value="1 vidéo par jour" readonly><button onclick="saveTime()">Enregistrer la préférence</button><p id="timeNotice" class="small">Horaire indicatif uniquement : cela ne déclenche aucune publication automatique.</p></div></section>  
+<section id="history" class="view"><div class="card"><h2>Historique des projets</h2><div id="items">Aucun projet pour le moment.</div></div></section>  
+<section id="accounts" class="view"><div class="card"><h2>Connexion officielle</h2><p>Les comptes ne sont pas connectés dans cette version. Ne saisis jamais tes mots de passe ici.</p><div class="item"><strong>YouTube</strong><p class="small">Une intégration OAuth et l'API YouTube seront nécessaires pour une publication autorisée.</p><a href="https://developers.google.com/youtube/v3/guides/authentication" target="_blank" rel="noopener">Documentation officielle YouTube</a></div><div class="item"><strong>TikTok</strong><p class="small">Une application développeur et les autorisations de publication seront nécessaires.</p><a href="https://developers.tiktok.com/doc/content-posting-api-get-started/" target="_blank" rel="noopener">Documentation officielle TikTok</a></div></div></section>  
+<footer>AutoCreator AI · Prototype local. Les projets sont enregistrés dans le stockage de ce navigateur sur cet appareil.</footer>  
+</main>  
+<script>  
+const KEY='autocreator_ai_projects_v2';let projects=[];let currentVideoUrl=null;  
+try{projects=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(projects))projects=[];}catch(e){projects=[]}  
+function saveProjects(){try{localStorage.setItem(KEY,JSON.stringify(projects))}catch(e){alert("Le navigateur n'a pas pu enregistrer les projets.")}}  
+function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='history')render()}  
+function clearScript(){document.getElementById('script').value=''}  
+function prepare(){const title=document.getElementById('title').value.trim(),topic=document.getElementById('topic').value,script=document.getElementById('script').value.trim(),duration=Number(document.getElementById('duration').value);if(!title||!script){alert('Ajoute un titre et un script.');return}const p={id:Date.now(),title,topic,script,duration,status:'À valider',createdAt:new Date().toISOString()};projects.unshift(p);saveProjects();render();renderPreview(p);document.getElementById('notice').textContent='Projet préparé. Relis tout le texte avant de le valider.'}  
+function renderPreview(p){const preview=document.getElementById('preview');preview.innerHTML='';const box=document.createElement('div');box.className='card';const h=document.createElement('h2');h.textContent=p.title;box.appendChild(h);const d=document.createElement('p');d.textContent='Thème : '+p.topic+' · '+p.duration+' secondes';box.appendChild(d);const t=document.createElement('p');t.textContent=p.script;box.appendChild(t);const status=document.createElement('p');status.className='small';status.textContent='Statut : '+p.status;box.appendChild(status);const validate=document.createElement('button');validate.textContent=p.status==='À valider'?'Je valide ce script':'Script déjà validé';validate.disabled=p.status!=='À valider';validate.onclick=()=>{p.status='Script validé';saveProjects();status.textContent='Script validé. Tu peux maintenant créer la vidéo.';validate.disabled=true;render();addVideoButton(box,p)};box.appendChild(validate);if(p.status==='Script validé'||p.status==='Vidéo créée')addVideoButton(box,p);preview.appendChild(box)}  
+function addVideoButton(box,p){if(box.querySelector('[data-video]'))return;const btn=document.createElement('button');btn.dataset.video='1';btn.style.marginTop='12px';btn.textContent='🎬 Créer la vidéo animée';btn.onclick=()=>createVideo(p);box.appendChild(btn);const hint=document.createElement('p');hint.className='small';hint.textContent='Animation simple de texte : pas encore de voix ni de séquences filmées.';box.appendChild(hint)}  
+function createVideo(p){if(p.status!=='Script validé'&&p.status!=='Vidéo créée'){alert('Valide le script avant de créer la vidéo.');return}if(!HTMLCanvasElement.prototype.captureStream||!window.MediaRecorder){alert("Ton navigateur ne permet pas de créer cette vidéo ici. Essaie Chrome à jour.");return}const canvas=document.createElement('canvas');canvas.width=720;canvas.height=1280;const ctx=canvas.getContext('2d'),stream=canvas.captureStream(24);let mime='video/webm;codecs=vp9';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm;codecs=vp8';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm';let recorder;try{recorder=new MediaRecorder(stream,{mimeType:mime})}catch(e){alert('Impossible de créer la vidéo dans ce navigateur.');return}const chunks=[],seconds=Math.min(Math.max(p.duration||30,10),60),total=seconds*24;let frame=0;const lines=[];let line='';ctx.font='30px Arial';p.script.split(/\s+/).forEach(w=>{const test=line?line+' '+w:w;if(ctx.measureText(test).width>590&&line){lines.push(line);line=w}else line=test});if(line)lines.push(line);const shown=lines.slice(0,18);  
+recorder.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};recorder.onstop=()=>{stream.getTracks().forEach(t=>t.stop());const blob=new Blob(chunks,{type:'video/webm'});if(currentVideoUrl)URL.revokeObjectURL(currentVideoUrl);currentVideoUrl=URL.createObjectURL(blob);p.status='Vidéo créée';saveProjects();render();const result=document.createElement('div');result.className='card';const h=document.createElement('h2');h.textContent='Ta vidéo est prête 🎉';result.appendChild(h);const v=document.createElement('video');v.controls=true;v.src=currentVideoUrl;result.appendChild(v);const a=document.createElement('a');a.href=currentVideoUrl;a.download='autocreator-rappel-islamique.webm';a.textContent='📥 Télécharger la vidéo';a.style.display='inline-block';a.style.marginTop='14px';result.appendChild(a);const note=document.createElement('p');note.className='small';note.textContent='Format WebM. Si une application ne l’accepte pas, importe-la dans CapCut et exporte en MP4.';result.appendChild(note);document.getElementById('preview').appendChild(result);result.scrollIntoView({behavior:'smooth',block:'start'})};  
+recorder.start();function draw(){const progress=frame/total;const g=ctx.createLinearGradient(0,0,720,1280);g.addColorStop(0,'#211b3b');g.addColorStop(.55,'#39275f');g.addColorStop(1,'#9b6b42');ctx.fillStyle=g;ctx.fillRect(0,0,720,1280);ctx.fillStyle='rgba(255,255,255,.08)';ctx.beginPath();ctx.arc(360,300,130+Math.sin(frame/20)*8,0,Math.PI*2);ctx.fill();ctx.textAlign='center';ctx.fillStyle='#f8df9b';ctx.font='bold 30px Arial';ctx.fillText('☾ RAPPEL ISLAMIQUE ☽',360,160);ctx.fillStyle='#fff';ctx.font='bold 42px Arial';wrap(ctx,p.title,360,390,580,54,3);ctx.fillStyle='#f8df9b';ctx.font='bold 25px Arial';ctx.fillText(p.topic,360,570);ctx.fillStyle='#fff';ctx.font='28px Arial';shown.forEach((l,i)=>ctx.fillText(l,360,650+i*38));ctx.fillStyle='#f8df9b';ctx.font='bold 23px Arial';ctx.fillText('Rappelle-toi et partage le bien',360,1160);ctx.fillStyle='rgba(255,255,255,.5)';ctx.fillRect(60,1210,600,7);ctx.fillStyle='#f8df9b';ctx.fillRect(60,1210,600*progress,7);frame++;if(frame<total)requestAnimationFrame(draw);else recorder.stop()}function wrap(c,s,x,y,w,lh,max){let out=[],l='';s.split(/\s+/).forEach(word=>{const test=l?l+' '+word:word;if(c.measureText(test).width>w&&l){out.push(l);l=word}else l=test});if(l)out.push(l);out.slice(0,max).forEach((v,i)=>c.fillText(v,x,y+i*lh))}draw()}  
+function render(){document.getElementById('count').textContent=projects.length;document.getElementById('pending').textContent=projects.filter(p=>p.status==='À valider').length;const items=document.getElementById('items');items.innerHTML='';if(!projects.length){items.textContent='Aucun projet pour le moment.';return}projects.forEach(p=>{const div=document.createElement('div');div.className='item';const strong=document.createElement('strong');strong.textContent=p.title;div.appendChild(strong);const detail=document.createElement('p');detail.textContent=p.topic+' · '+p.status;div.appendChild(detail);items.appendChild(div)})}  
+function saveTime(){try{localStorage.setItem('autocreator_ai_time',document.getElementById('time').value)}catch(e){}document.getElementById('timeNotice').textContent='Préférence enregistrée sur cet appareil : '+document.getElementById('time').value+'. Aucune publication automatique.'}  
+try{const t=localStorage.getItem('autocreator_ai_time');if(t)document.getElementById('time').value=t}catch(e){}render();  
+</script>  
+</body>  
+</html>  
