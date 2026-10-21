@@ -251,7 +251,308 @@ hint.textContent='Animation simple de texte : pas encore de voix ni de séquence
 box.appendChild(hint);
 }
 
-function createVideo(p){
+
+function createVideo(p) {
+  if (p.status !== 'Script validé' && p.status !== 'Vidéo créée') {
+    alert('Valide le script avant de créer la vidéo.');
+    return;
+  }
+
+  if (!HTMLCanvasElement.prototype.captureStream || !window.MediaRecorder) {
+    alert('Ton navigateur ne permet pas de créer cette vidéo. Essaie Chrome à jour.');
+    return;
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 720;
+  canvas.height = 1280;
+
+  const ctx = canvas.getContext('2d');
+  const stream = canvas.captureStream(24);
+
+  let mime = 'video/webm;codecs=vp9';
+  if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm;codecs=vp8';
+  if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm';
+
+  let recorder;
+
+  try {
+    recorder = new MediaRecorder(stream, { mimeType: mime });
+  } catch (e) {
+    alert('Impossible de créer la vidéo dans ce navigateur.');
+    return;
+  }
+
+  const chunks = [];
+  const seconds = Math.min(Math.max(Number(p.duration) || 30, 10), 60);
+  const total = seconds * 24;
+  let frame = 0;
+
+  const script = String(p.script || '');
+  const words = script.split(/\s+/);
+  const lines = [];
+  let line = '';
+
+  ctx.font = '29px Arial';
+
+  words.forEach(word => {
+    const test = line ? line + ' ' + word : word;
+    if (ctx.measureText(test).width > 580 && line) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = test;
+    }
+  });
+
+  if (line) lines.push(line);
+
+  const shown = lines.slice(0, 12);
+  const title = String(p.title || 'Un rappel pour le cœur');
+  const topic = String(p.topic || 'Rappel islamique');
+
+  const scenes = [
+    { sky: '#17152f', middle: '#45336d', ground: '#93664f', accent: '#f7d995' },
+    { sky: '#142b40', middle: '#397080', ground: '#547b68', accent: '#ffe1a0' },
+    { sky: '#35204b', middle: '#80517d', ground: '#d09564', accent: '#fff0bd' },
+    { sky: '#101d35', middle: '#344b72', ground: '#516b65', accent: '#f8df9b' }
+  ];
+
+  function roundedRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, r);
+  }
+
+  function drawMosque(x, base, scale) {
+    ctx.save();
+    ctx.translate(x, base);
+    ctx.scale(scale, scale);
+    ctx.fillStyle = 'rgba(12,15,35,0.48)';
+
+    ctx.fillRect(-115, -110, 230, 110);
+    ctx.beginPath();
+    ctx.arc(0, -110, 72, Math.PI, 0);
+    ctx.fill();
+
+    ctx.fillRect(-160, -85, 30, 85);
+    ctx.fillRect(130, -85, 30, 85);
+
+    ctx.beginPath();
+    ctx.moveTo(-160, -85);
+    ctx.lineTo(-145, -120);
+    ctx.lineTo(-130, -85);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(130, -85);
+    ctx.lineTo(145, -120);
+    ctx.lineTo(160, -85);
+    ctx.fill();
+
+    ctx.fillRect(-15, -220, 30, 110);
+    ctx.beginPath();
+    ctx.arc(0, -220, 15, Math.PI, 0);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(0, -265);
+    ctx.lineTo(-10, -235);
+    ctx.lineTo(10, -235);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  function draw() {
+    const progress = frame / total;
+    const sceneIndex = Math.min(
+      scenes.length - 1,
+      Math.floor(progress * scenes.length)
+    );
+    const scene = scenes[sceneIndex];
+    const localProgress = (progress * scenes.length) % 1;
+
+    const gradient = ctx.createLinearGradient(0, 0, 100, 1280);
+    gradient.addColorStop(0, scene.sky);
+    gradient.addColorStop(0.58, scene.middle);
+    gradient.addColorStop(1, scene.ground);
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 720, 1280);
+
+    // Petites étoiles qui scintillent
+    for (let i = 0; i < 35; i++) {
+      const x = (i * 137 + 43) % 720;
+      const y = (i * 191 + 75) % 410;
+      const size = 1.5 + Math.sin(frame / 12 + i) * 1.2;
+
+      ctx.fillStyle = 'rgba(255,255,255,0.65)';
+      ctx.beginPath();
+      ctx.arc(x, y, Math.max(0.5, size), 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Lune ou soleil lumineux
+    const orbY = 265 + Math.sin(frame / 30) * 10;
+    const isNight = sceneIndex === 0 || sceneIndex === 3;
+
+    ctx.fillStyle = scene.accent;
+    ctx.globalAlpha = 0.85;
+    ctx.beginPath();
+    ctx.arc(isNight ? 530 : 550, orbY, 43, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    if (isNight) {
+      ctx.fillStyle = scene.sky;
+      ctx.beginPath();
+      ctx.arc(550, orbY - 14, 39, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Collines en arrière-plan
+    ctx.fillStyle = 'rgba(10,20,35,0.25)';
+    ctx.beginPath();
+    ctx.moveTo(0, 760);
+    ctx.quadraticCurveTo(190, 590, 370, 760);
+    ctx.quadraticCurveTo(550, 630, 720, 745);
+    ctx.lineTo(720, 1280);
+    ctx.lineTo(0, 1280);
+    ctx.closePath();
+    ctx.fill();
+
+    // Silhouette d'une mosquée
+    drawMosque(360, 900, 0.85);
+
+    // Voile sombre pour améliorer la lecture du texte
+    const shade = ctx.createLinearGradient(0, 350, 0, 1050);
+    shade.addColorStop(0, 'rgba(10,10,30,0.05)');
+    shade.addColorStop(1, 'rgba(10,10,30,0.48)');
+    ctx.fillStyle = shade;
+    ctx.fillRect(0, 350, 720, 700);
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    ctx.fillStyle = scene.accent;
+    ctx.font = 'bold 28px Arial';
+    ctx.fillText('☾ RAPPEL ISLAMIQUE ☽', 360, 105);
+
+    // Titre sur plusieurs lignes
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 43px Arial';
+
+    const titleLines = [];
+    let titleLine = '';
+
+    title.split(/\s+/).forEach(word => {
+      const test = titleLine ? titleLine + ' ' + word : word;
+      if (ctx.measureText(test).width > 590 && titleLine) {
+        titleLines.push(titleLine);
+        titleLine = word;
+      } else {
+        titleLine = test;
+      }
+    });
+
+    if (titleLine) titleLines.push(titleLine);
+
+    titleLines.slice(0, 3).forEach((text, i) => {
+      ctx.fillText(text, 360, 405 + i * 55);
+    });
+
+    ctx.fillStyle = scene.accent;
+    ctx.font = 'bold 25px Arial';
+    ctx.fillText(topic.slice(0, 42), 360, 590);
+
+    // Texte réparti sur plusieurs lignes
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '28px Arial';
+
+    const visibleCount = Math.max(
+      1,
+      Math.ceil(shown.length * Math.min(1, progress * 1.8 + 0.15))
+    );
+
+    shown.slice(0, visibleCount).forEach((text, i) => {
+      ctx.fillText(text, 360, 670 + i * 39);
+    });
+
+    ctx.fillStyle = scene.accent;
+    ctx.font = 'bold 23px Arial';
+    ctx.fillText('Rappelle-toi et partage le bien', 360, 1135);
+
+    // Barre de progression
+    ctx.fillStyle = 'rgba(255,255,255,0.45)';
+    ctx.fillRect(60, 1200, 600, 7);
+
+    ctx.fillStyle = scene.accent;
+    ctx.fillRect(60, 1200, 600 * progress, 7);
+
+    frame++;
+
+    if (frame < total) {
+      requestAnimationFrame(draw);
+    } else {
+      recorder.stop();
+    }
+  }
+
+  recorder.ondataavailable = e => {
+    if (e.data && e.data.size) chunks.push(e.data);
+  };
+
+  recorder.onstop = () => {
+    stream.getTracks().forEach(track => track.stop());
+
+    const blob = new Blob(chunks, { type: 'video/webm' });
+
+    if (currentVideoUrl) URL.revokeObjectURL(currentVideoUrl);
+    currentVideoUrl = URL.createObjectURL(blob);
+
+    p.status = 'Vidéo créée';
+    saveProjects();
+    render();
+
+    const result = document.createElement('div');
+    result.className = 'card';
+
+    const heading = document.createElement('h2');
+    heading.textContent = 'Ta vidéo est prête 🎉';
+    result.appendChild(heading);
+
+    const video = document.createElement('video');
+    video.controls = true;
+    video.playsInline = true;
+    video.src = currentVideoUrl;
+    video.style.width = '100%';
+    video.style.borderRadius = '14px';
+    result.appendChild(video);
+
+    const link = document.createElement('a');
+    link.href = currentVideoUrl;
+    link.download = 'autocreator-rappel-islamique.webm';
+    link.textContent = '📥 Télécharger la vidéo';
+    link.style.display = 'inline-block';
+    link.style.marginTop = '14px';
+    result.appendChild(link);
+
+    const note = document.createElement('p');
+    note.className = 'small';
+    note.textContent =
+      'Vidéo WebM avec plusieurs scènes illustrées. Ajoute ta voix et exporte en MP4 dans CapCut.';
+    result.appendChild(note);
+
+    const preview = document.getElementById('preview');
+    preview.appendChild(result);
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  recorder.start();
+  draw();
+}
+
 if(p.status!=='Script validé'&&p.status!=='Vidéo créée'){
 alert('Valide le script avant de créer la vidéo.');
 return;
