@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,614 +5,137 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AutoCreator AI</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f5f3fc;color:#24213b;font-family:Arial,sans-serif}
-header{background:#211b3b;color:white;padding:24px 18px}
-header h1{margin:0 0 8px;font-size:26px}
-header p{margin:0;color:#ded7ff}
-main{max-width:750px;margin:auto;padding:16px}
-.card{background:white;border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 3px 14px #211b3b0d}
-h2{font-size:19px;margin-top:0}
-label{display:block;font-weight:bold;margin:12px 0 7px}
+*{box-sizing:border-box}body{margin:0;background:#f5f3fc;color:#24213b;font-family:Arial,sans-serif}
+header{background:#211b3b;color:white;padding:24px 18px}header h1{margin:0 0 8px;font-size:26px}header p{margin:0;color:#ded7ff}
+main{max-width:750px;margin:auto;padding:16px}.card{background:white;border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 3px 14px #211b3b0d}
+h2{font-size:19px;margin-top:0}label{display:block;font-weight:bold;margin:12px 0 7px}
 input,select,textarea{width:100%;padding:12px;border:1px solid #d7d2e6;border-radius:9px;font-size:16px;background:white}
-button{border:0;border-radius:10px;padding:13px 16px;background:#6d55d9;color:white;font-size:15px;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.55}
-.secondary{background:#eeeafd;color:#44368b}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat div{background:#eeeafd;padding:14px;border-radius:12px}
-.small{font-size:13px;color:#77718e;line-height:1.5}
-nav{display:flex;gap:7px;overflow:auto;padding:10px 0}
-nav button{white-space:nowrap;padding:10px;font-size:13px}
-.view{display:none}
-.view.active{display:block}
-.item{border-bottom:1px solid #eee;padding:12px 0}
-footer{text-align:center;padding:20px;color:#77718e;font-size:12px}
-video{width:100%;max-width:420px;background:#17132c;border-radius:12px;display:block;margin-top:12px}
-a{color:#5941bd}
+button{border:0;border-radius:10px;padding:13px 16px;background:#6d55d9;color:white;font-size:15px;font-weight:bold;cursor:pointer}button:disabled{opacity:.55}
+.secondary{background:#eeeafd;color:#44368b}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat div{background:#eeeafd;padding:14px;border-radius:12px}
+.small{font-size:13px;color:#77718e;line-height:1.5}nav{display:flex;gap:7px;overflow:auto;padding:10px 0}nav button{white-space:nowrap;padding:10px;font-size:13px}
+.view{display:none}.view.active{display:block}.item{border-bottom:1px solid #eee;padding:12px 0}footer{text-align:center;padding:20px;color:#77718e;font-size:12px}
+video{width:100%;max-width:420px;background:#17132c;border-radius:12px;display:block;margin-top:12px}a{color:#5941bd}
 </style>
 </head>
 <body>
-<header>
-<h1>✨ AutoCreator AI</h1>
-<p>Ton studio de rappels islamiques</p>
-<p style="margin-top:14px;font-size:13px">PROTOTYPE AMÉLIORÉ · Validation obligatoire</p>
-</header>
+<header><h1>✨ AutoCreator AI</h1><p>Ton studio de rappels islamiques</p><p style="margin-top:14px;font-size:13px">PROTOTYPE · Validation obligatoire</p></header>
 <main>
 <nav>
-<button onclick="show('home')">Accueil</button>
-<button onclick="show('create')">Créer</button>
-<button onclick="show('calendar')">Calendrier</button>
-<button onclick="show('history')">Historique</button>
-<button onclick="show('accounts')">Mes réseaux</button>
+<button onclick="show('home')">Accueil</button><button onclick="show('create')">Créer</button><button onclick="show('calendar')">Calendrier</button><button onclick="show('history')">Historique</button><button onclick="show('accounts')">Mes réseaux</button>
 </nav>
-
 <section id="home" class="view active">
-<div class="card">
-<h2>Bienvenue dans ton studio 🌙</h2>
-<p>Prépare un rappel islamique, vérifie-le, puis valide-le avant de créer une vidéo téléchargeable.</p>
-<div class="stat">
-<div><strong id="count">0</strong><br>Projets enregistrés</div>
-<div><strong id="pending">0</strong><br>À valider</div>
-</div>
-<div class="actions">
-<button onclick="show('create')">＋ Créer une vidéo</button>
-</div>
-</div>
-<div class="card">
-<h2>Comment ça marche ?</h2>
-<p>① Choisis un thème et relis le texte.</p>
-<p>② Valide toi-même le script.</p>
-<p>③ Génère et télécharge la vidéo animée.</p>
-<p>④ Publie manuellement sur tes réseaux après vérification.</p>
-<p class="small">Cette version crée une vidéo simple avec texte animé. Elle n'ajoute pas encore de voix, de photos/vidéos externes ni de publication automatique.</p>
-</div>
+<div class="card"><h2>Bienvenue dans ton studio 🌙</h2><p>Prépare un rappel islamique, vérifie-le, puis valide-le avant de créer une vidéo téléchargeable.</p>
+<div class="stat"><div><strong id="count">0</strong><br>Projets enregistrés</div><div><strong id="pending">0</strong><br>À valider</div></div>
+<div class="actions"><button onclick="show('create')">＋ Créer une vidéo</button></div></div>
+<div class="card"><h2>Comment ça marche ?</h2><p>① Choisis un thème et relis le texte.</p><p>② Écoute le texte avec une voix française disponible sur ton téléphone.</p><p>③ Valide le script et crée la vidéo.</p><p>④ Pour inclure une voix dans la vidéo, ajoute un fichier audio dans la section Voix off.</p><p class="small">La lecture vocale du navigateur sert à écouter le texte. Pour enregistrer la voix dans le fichier vidéo, un fichier audio doit être fourni : le navigateur ne permet pas de capturer directement la voix de synthèse.</p></div>
 </section>
-
-<section id="create" class="view">
-<div class="card">
+<section id="create" class="view"><div class="card">
 <h2>Créer un rappel islamique</h2>
-<label for="title">Titre</label>
-<input id="title" value="Le pouvoir de dire Alhamdoulillah">
-<label for="topic">Thème</label>
-<select id="topic">
-<option>Gratitude envers Allah</option>
-<option>La prière</option>
-<option>La patience dans les épreuves</option>
-<option>Le repentir</option>
-<option>Le respect des parents</option>
-<option>Enseignements du Coran</option>
-<option>Rappel du vendredi</option>
-</select>
-<label for="duration">Durée souhaitée</label>
-<select id="duration">
-<option value="30">30 secondes</option>
-<option value="45" selected>45 secondes</option>
-<option value="60">60 secondes</option>
-</select>
-<label for="script">Script du rappel</label>
-<textarea id="script" rows="6">Prenons un instant pour remercier Allah pour la vie, chaque nouvelle journée et les occasions de faire le bien. Que nos cœurs restent reconnaissants et que nos actions reflètent cette gratitude.</textarea>
-<div class="actions">
-<button onclick="prepare()">Préparer le projet</button>
-<button class="secondary" onclick="clearScript()">Effacer le script</button>
-</div>
-<p id="notice" class="small">Relis le texte et vérifie les références religieuses avant toute publication.</p>
-<div id="preview"></div>
-</div>
-</section>
-
-<section id="calendar" class="view">
-<div class="card">
-<h2>Calendrier éditorial</h2>
-<label for="time">Heure souhaitée</label>
-<select id="time">
-<option>12:00</option>
-<option>15:00</option>
-<option selected>18:00</option>
-<option>20:00</option>
-<option>21:00</option>
-</select>
-<label for="frequency">Fréquence</label>
-<input id="frequency" value="1 vidéo par jour" readonly>
-<button onclick="saveTime()">Enregistrer la préférence</button>
-<p id="timeNotice" class="small">Horaire indicatif uniquement : cela ne déclenche aucune publication automatique.</p>
-</div>
-</section>
-
-<section id="history" class="view">
-<div class="card">
-<h2>Historique des projets</h2>
-<div id="items">Aucun projet pour le moment.</div>
-</div>
-</section>
-
-<section id="accounts" class="view">
-<div class="card">
-<h2>Connexion officielle</h2>
-<p>Les comptes ne sont pas connectés dans cette version. Ne saisis jamais tes mots de passe ici.</p>
-<div class="item">
-<strong>YouTube</strong>
-<p class="small">Une intégration OAuth et l'API YouTube seront nécessaires pour une publication autorisée.</p>
-<a href="https://developers.google.com/youtube/v3/guides/authentication" target="_blank" rel="noopener">Documentation officielle YouTube</a>
-</div>
-<div class="item">
-<strong>TikTok</strong>
-<p class="small">Une application développeur et les autorisations de publication seront nécessaires.</p>
-<a href="https://developers.tiktok.com/doc/content-posting-api-get-started/" target="_blank" rel="noopener">Documentation officielle TikTok</a>
-</div>
-</div>
-</section>
-
+<label for="title">Titre</label><input id="title" value="Le pouvoir de dire Alhamdoulillah">
+<label for="topic">Thème</label><select id="topic"><option>Gratitude envers Allah</option><option>La prière</option><option>La patience dans les épreuves</option><option>Le repentir</option><option>Le respect des parents</option><option>Enseignements du Coran</option><option>Rappel du vendredi</option></select>
+<label for="duration">Durée souhaitée</label><select id="duration"><option value="30">30 secondes</option><option value="45" selected>45 secondes</option><option value="60">60 secondes</option></select>
+<label for="script">Script du rappel</label><textarea id="script" rows="6">Prenons un instant pour remercier Allah pour la vie, chaque nouvelle journée et les occasions de faire le bien. Que nos cœurs restent reconnaissants et que nos actions reflètent cette gratitude.</textarea>
+<div class="card"><h2>🎙️ Voix off française</h2><p class="small">Écoute ton texte avec une voix française installée sur ton téléphone. Pour inclure une voix dans la vidéo téléchargée, ajoute un fichier audio préenregistré (MP3, M4A ou WAV). La voix de synthèse du navigateur ne peut pas être enregistrée directement dans la vidéo.</p>
+<div class="actions"><button type="button" onclick="speakScript()">🔊 Écouter le rappel</button><button type="button" class="secondary" onclick="stopSpeaking()">⏹ Arrêter la voix</button></div>
+<p id="voiceStatus" class="small" aria-live="polite">La voix entendue dépend des voix installées sur ton téléphone.</p>
+<label for="voiceAudio">Fichier audio à intégrer à la vidéo (facultatif)</label><input id="voiceAudio" type="file" accept="audio/*">
+<p class="small">Choisis un audio qui dure environ autant que la vidéo (30, 45 ou 60 secondes). Sans fichier audio, la vidéo sera silencieuse, mais tu peux écouter le texte sur cette page.</p></div>
+<div class="actions"><button onclick="prepare()">Préparer le projet</button><button class="secondary" onclick="clearScript()">Effacer le script</button></div>
+<p id="notice" class="small">Relis le texte et vérifie les références religieuses avant publication.</p><div id="preview"></div>
+</div></section>
+<section id="calendar" class="view"><div class="card"><h2>Calendrier éditorial</h2><label for="time">Heure souhaitée</label><select id="time"><option>12:00</option><option>15:00</option><option selected>18:00</option><option>20:00</option><option>21:00</option></select><label for="frequency">Fréquence</label><input id="frequency" value="1 vidéo par jour" readonly><button onclick="saveTime()">Enregistrer la préférence</button><p id="timeNotice" class="small">Horaire indicatif uniquement : aucune publication automatique.</p></div></section>
+<section id="history" class="view"><div class="card"><h2>Historique des projets</h2><div id="items">Aucun projet pour le moment.</div></div></section>
+<section id="accounts" class="view"><div class="card"><h2>Connexion officielle</h2><p>Les comptes ne sont pas connectés. Ne saisis jamais tes mots de passe ici.</p><div class="item"><strong>YouTube</strong><p class="small">Une intégration OAuth et l'API YouTube seront nécessaires pour publier.</p><a href="https://developers.google.com/youtube/v3/guides/authentication" target="_blank" rel="noopener">Documentation officielle YouTube</a></div><div class="item"><strong>TikTok</strong><p class="small">Une application développeur et des autorisations sont nécessaires.</p><a href="https://developers.tiktok.com/doc/content-posting-api-get-started/" target="_blank" rel="noopener">Documentation officielle TikTok</a></div></div></section>
 <footer>AutoCreator AI · Prototype local. Les projets sont enregistrés dans le stockage de ce navigateur sur cet appareil.</footer>
 </main>
-
 <script>
-const KEY='autocreator_ai_projects_v2';
-let projects=[];
-let currentVideoUrl=null;
-
-try{
-projects=JSON.parse(localStorage.getItem(KEY)||'[]');
-if(!Array.isArray(projects))projects=[];
-}catch(e){projects=[]}
-
-function saveProjects(){
-try{localStorage.setItem(KEY,JSON.stringify(projects))}
-catch(e){alert("Le navigateur n'a pas pu enregistrer les projets.")}
+const KEY='autocreator_ai_projects_v2';let projects=[];let currentVideoUrl=null;
+try{projects=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(projects))projects=[]}catch(e){projects=[]}
+function saveProjects(){try{localStorage.setItem(KEY,JSON.stringify(projects))}catch(e){alert("Le navigateur n'a pas pu enregistrer les projets.")}}
+function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));const el=document.getElementById(id);if(el)el.classList.add('active');if(id==='history')render()}
+function clearScript(){document.getElementById('script').value='';stopSpeaking()}
+function speakScript(){
+ if(!('speechSynthesis'in window)||!('SpeechSynthesisUtterance'in window)){alert("La lecture vocale n'est pas disponible. Essaie Chrome à jour.");return}
+ const txt=document.getElementById('script').value.trim();if(!txt){alert("Écris d'abord le texte du rappel.");return}
+ window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='fr-FR';u.rate=.92;u.pitch=1.08;
+ const voices=window.speechSynthesis.getVoices();const fr=voices.filter(v=>/^fr([-_]|$)/i.test(v.lang));const chosen=fr.find(v=>/female|femme|audrey|amelie|julie|marie|celine|lea|hortense|denise/i.test(v.name));u.voice=chosen||fr[0]||null;
+ u.onstart=()=>document.getElementById('voiceStatus').textContent='Lecture en cours. La voix dépend des voix disponibles sur ton téléphone.';
+ u.onend=()=>document.getElementById('voiceStatus').textContent='Lecture terminée.';
+ u.onerror=()=>document.getElementById('voiceStatus').textContent='Échec de la lecture. Vérifie les voix françaises du téléphone.';
+ window.speechSynthesis.speak(u)
 }
-
-function show(id){
-document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-if(id==='history')render();
-}
-
-function clearScript(){
-document.getElementById('script').value='';
-}
-
+function stopSpeaking(){if('speechSynthesis'in window)window.speechSynthesis.cancel();const el=document.getElementById('voiceStatus');if(el)el.textContent='Lecture arrêtée.'}
 function prepare(){
-const title=document.getElementById('title').value.trim();
-const topic=document.getElementById('topic').value;
-const script=document.getElementById('script').value.trim();
-const duration=Number(document.getElementById('duration').value);
-
-if(!title||!script){alert('Ajoute un titre et un script.');return}
-
-const p={
-id:Date.now(),title,topic,script,duration,
-status:'À valider',createdAt:new Date().toISOString()
-};
-
-projects.unshift(p);
-saveProjects();
-render();
-renderPreview(p);
-document.getElementById('notice').textContent='Projet préparé. Relis tout le texte avant de le valider.';
+ const title=document.getElementById('title').value.trim(),topic=document.getElementById('topic').value,script=document.getElementById('script').value.trim(),duration=Number(document.getElementById('duration').value);
+ if(!title||!script){alert('Ajoute un titre et un script.');return}
+ const p={id:Date.now(),title,topic,script,duration,status:'À valider',createdAt:new Date().toISOString()};projects.unshift(p);saveProjects();render();renderPreview(p);document.getElementById('notice').textContent='Projet préparé. Relis le texte avant de le valider.'
 }
-
 function renderPreview(p){
-const preview=document.getElementById('preview');
-preview.innerHTML='';
-
-const box=document.createElement('div');
-box.className='card';
-
-const h=document.createElement('h2');
-h.textContent=p.title;
-box.appendChild(h);
-
-const d=document.createElement('p');
-d.textContent='Thème : '+p.topic+' · '+p.duration+' secondes';
-box.appendChild(d);
-
-const t=document.createElement('p');
-t.textContent=p.script;
-box.appendChild(t);
-
-const status=document.createElement('p');
-status.className='small';
-status.textContent='Statut : '+p.status;
-box.appendChild(status);
-
-const validate=document.createElement('button');
-validate.textContent=p.status==='À valider'?'Je valide ce script':'Script déjà validé';
-validate.disabled=p.status!=='À valider';
-
-validate.onclick=()=>{
-p.status='Script validé';
-saveProjects();
-status.textContent='Script validé. Tu peux maintenant créer la vidéo.';
-validate.disabled=true;
+ const preview=document.getElementById('preview');preview.innerHTML='';const box=document.createElement('div');box.className='card';
+ const h=document.createElement('h2');h.textContent=p.title;box.appendChild(h);
+ const d=document.createElement('p');d.textContent='Thème : '+p.topic+' · '+p.duration+' secondes';box.appendChild(d);
+ const t=document.createElement('p');t.textContent=p.script;box.appendChild(t);
+ const status=document.createElement('p');status.className='small';status.textContent='Statut : '+p.status;box.appendChild(status);
+ const validate=document.createElement('button');validate.textContent=p.status==='À valider'?'Je valide ce script':'Script déjà validé';validate.disabled=p.status!=='À valider';
+ validate.onclick=()=>{p.status='Script validé';saveProjects();status.textContent='Script validé. Tu peux créer la vidéo.';validate.disabled=true;render();addVideoButton(box,p)};
+ box.appendChild(validate);if(p.status==='Script validé'||p.status==='Vidéo créée')addVideoButton(box,p);preview.appendChild(box)
+}
+function addVideoButton(box,p){if(box.querySelector('[data-video]'))return;const b=document.createElement('button');b.dataset.video='1';b.style.marginTop='12px';b.textContent='🎬 Créer la vidéo animée';b.onclick=()=>createVideo(p);box.appendChild(b);const hint=document.createElement('p');hint.className='small';hint.textContent='La vidéo inclura le fichier audio choisi. Sans fichier audio, elle sera silencieuse.';box.appendChild(hint)}
+async function createVideo(p){
+ if(p.status!=='Script validé'&&p.status!=='Vidéo créée'){alert('Valide le script avant de créer la vidéo.');return}
+ if(!HTMLCanvasElement.prototype.captureStream||!window.MediaRecorder){alert('Ton navigateur ne permet pas de créer cette vidéo. Essaie Chrome à jour.');return}
+ const file=document.getElementById('voiceAudio').files[0]||null,canvas=document.createElement('canvas');canvas.width=720;canvas.height=1280;
+ const ctx=canvas.getContext('2d'),stream=canvas.captureStream(24);let audio=null,audioCtx=null,audioUrl=null,audioDuration=0;
+ if(file){
+  try{
+   audioUrl=URL.createObjectURL(file);audio=new Audio();audio.src=audioUrl;audio.preload='auto';
+   await new Promise((resolve,reject)=>{audio.onloadedmetadata=resolve;audio.onerror=()=>reject(Error('Audio illisible'));audio.load()});
+   audioDuration=Number.isFinite(audio.duration)?audio.duration:0;
+   audioCtx=new(window.AudioContext||window.webkitAudioContext)();const source=audioCtx.createMediaElementSource(audio),dest=audioCtx.createMediaStreamDestination();source.connect(dest);source.connect(audioCtx.destination);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t))
+  }catch(e){alert("Fichier audio illisible. Essaie un MP3, M4A ou WAV.");stream.getTracks().forEach(t=>t.stop());if(audioCtx)audioCtx.close().catch(()=>{});if(audioUrl)URL.revokeObjectURL(audioUrl);return}
+ }
+ let mime='video/webm;codecs=vp9';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm;codecs=vp8';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm';
+ let recorder;try{recorder=new MediaRecorder(stream,{mimeType:mime})}catch(e){alert('Impossible de créer la vidéo dans ce navigateur.');stream.getTracks().forEach(t=>t.stop());if(audioCtx)audioCtx.close().catch(()=>{});if(audioUrl)URL.revokeObjectURL(audioUrl);return}
+ const chunks=[],chosen=Math.min(Math.max(Number(p.duration)||30,10),60),seconds=file&&audioDuration>0?Math.min(Math.max(audioDuration,10),60):chosen,total=Math.round(seconds*24);let frame=0;
+ const lines=[];let line='';ctx.font='29px Arial';String(p.script||'').split(/\s+/).forEach(w=>{const test=line?line+' '+w:w;if(ctx.measureText(test).width>580&&line){lines.push(line);line=w}else line=test});if(line)lines.push(line);
+ const shown=lines.slice(0,12),title=String(p.title||'Un rappel pour le cœur'),topic=String(p.topic||'Rappel islamique');
+ const scenes=[{sky:'#17152f',mid:'#45336d',ground:'#93664f',accent:'#f7d995'},{sky:'#142b40',mid:'#397080',ground:'#547b68',accent:'#ffe1a0'},{sky:'#35204b',mid:'#80517d',ground:'#d09564',accent:'#fff0bd'},{sky:'#101d35',mid:'#344b72',ground:'#516b65',accent:'#f8df9b'}];
+ function mosque(x,base,s){ctx.save();ctx.translate(x,base);ctx.scale(s,s);ctx.fillStyle='rgba(12,15,35,.48)';ctx.fillRect(-115,-110,230,110);ctx.beginPath();ctx.arc(0,-110,72,Math.PI,0);ctx.fill();ctx.fillRect(-160,-85,30,85);ctx.fillRect(130,-85,30,85);ctx.beginPath();ctx.moveTo(-160,-85);ctx.lineTo(-145,-120);ctx.lineTo(-130,-85);ctx.fill();ctx.beginPath();ctx.moveTo(130,-85);ctx.lineTo(145,-120);ctx.lineTo(160,-85);ctx.fill();ctx.fillRect(-15,-220,30,110);ctx.beginPath();ctx.arc(0,-220,15,Math.PI,0);ctx.fill();ctx.beginPath();ctx.moveTo(0,-265);ctx.lineTo(-10,-235);ctx.lineTo(10,-235);ctx.closePath();ctx.fill();ctx.restore()}
+ function draw(){
+  const prog=frame/total,idx=Math.min(3,Math.floor(prog*4)),sc=scenes[idx],g=ctx.createLinearGradient(0,0,100,1280);g.addColorStop(0,sc.sky);g.addColorStop(.58,sc.mid);g.addColorStop(1,sc.ground);ctx.fillStyle=g;ctx.fillRect(0,0,720,1280);
+  for(let i=0;i<35;i++){const x=(i*137+43)%720,y=(i*191+75)%410,z=1.5+Math.sin(frame/12+i)*1.2;ctx.fillStyle='rgba(255,255,255,.65)';ctx.beginPath();ctx.arc(x,y,Math.max(.5,z),0,Math.PI*2);ctx.fill()}
+  const oy=265+Math.sin(frame/30)*10,night=idx===0||idx===3;ctx.fillStyle=sc.accent;ctx.globalAlpha=.85;ctx.beginPath();ctx.arc(night?530:550,oy,43,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+  if(night){ctx.fillStyle=sc.sky;ctx.beginPath();ctx.arc(550,oy-14,39,0,Math.PI*2);ctx.fill()}
+  ctx.fillStyle='rgba(10,20,35,.25)';ctx.beginPath();ctx.moveTo(0,760);ctx.quadraticCurveTo(190,590,370,760);ctx.quadraticCurveTo(550,630,720,745);ctx.lineTo(720,1280);ctx.lineTo(0,1280);ctx.closePath();ctx.fill();mosque(360,900,.85);
+  const shade=ctx.createLinearGradient(0,350,0,1050);shade.addColorStop(0,'rgba(10,10,30,.05)');shade.addColorStop(1,'rgba(10,10,30,.48)');ctx.fillStyle=shade;ctx.fillRect(0,350,720,700);
+  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=sc.accent;ctx.font='bold 28px Arial';ctx.fillText('☾ RAPPEL ISLAMIQUE ☽',360,105);
+  ctx.fillStyle='#fff';ctx.font='bold 43px Arial';let tl='',tls=[];title.split(/\s+/).forEach(w=>{const t=tl?tl+' '+w:w;if(ctx.measureText(t).width>590&&tl){tls.push(tl);tl=w}else tl=t});if(tl)tls.push(tl);tls.slice(0,3).forEach((t,i)=>ctx.fillText(t,360,405+i*55));
+  ctx.fillStyle=sc.accent;ctx.font='bold 25px Arial';ctx.fillText(topic.slice(0,42),360,590);ctx.fillStyle='#fff';ctx.font='28px Arial';const n=Math.max(1,Math.ceil(shown.length*Math.min(1,prog*1.8+.15)));shown.slice(0,n).forEach((t,i)=>ctx.fillText(t,360,670+i*39));
+  ctx.fillStyle=sc.accent;ctx.font='bold 23px Arial';ctx.fillText('Rappelle-toi et partage le bien',360,1135);ctx.fillStyle='rgba(255,255,255,.45)';ctx.fillRect(60,1200,600,7);ctx.fillStyle=sc.accent;ctx.fillRect(60,1200,600*prog,7);
+  frame++;if(frame<total)requestAnimationFrame(draw);else recorder.stop()
+ }
+ recorder.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+ recorder.onstop=()=>{
+  stream.getTracks().forEach(t=>t.stop());if(audio)audio.pause();if(audioCtx)audioCtx.close().catch(()=>{});if(audioUrl)URL.revokeObjectURL(audioUrl);
+  const blob=new Blob(chunks,{type:'video/webm'});if(currentVideoUrl)URL.revokeObjectURL(currentVideoUrl);currentVideoUrl=URL.createObjectURL(blob);p.status='Vidéo créée';saveProjects();render();
+  const result=document.createElement('div');result.className='card';const h=document.createElement('h2');h.textContent='Ta vidéo est prête 🎉';result.appendChild(h);
+  const v=document.createElement('video');v.controls=true;v.playsInline=true;v.src=currentVideoUrl;result.appendChild(v);
+  const a=document.createElement('a');a.href=currentVideoUrl;a.download='autocreator-rappel-islamique.webm';a.textContent='📥 Télécharger la vidéo';a.style.display='inline-block';a.style.marginTop='14px';result.appendChild(a);
+  const note=document.createElement('p');note.className='small';note.textContent=file?'Vidéo avec la piste audio choisie. Écoute-la avant publication.':'Vidéo sans voix intégrée. Utilise Écouter le rappel pour la lecture vocale, ou ajoute un fichier audio pour l’inclure au prochain rendu.';result.appendChild(note);
+  const preview=document.getElementById('preview');preview.appendChild(result);result.scrollIntoView({behavior:'smooth',block:'start'})
+ };
+ recorder.start();
+ if(audio&&audioCtx){try{await audioCtx.resume();await audio.play()}catch(e){alert("La lecture audio a été bloquée par le navigateur. Réessaie.")}}
+ draw()
+}
+function render(){
+ const count=document.getElementById('count'),pending=document.getElementById('pending'),items=document.getElementById('items');
+ if(count)count.textContent=projects.length;if(pending)pending.textContent=projects.filter(p=>p.status==='À valider').length;
+ if(items){items.innerHTML='';if(!projects.length)items.textContent='Aucun projet pour le moment.';else projects.forEach(p=>{const item=document.createElement('div');item.className='item';const title=document.createElement('strong');title.textContent=p.title;item.appendChild(title);const info=document.createElement('p');info.textContent=p.topic+' · '+p.status;item.appendChild(info);const b=document.createElement('button');b.textContent='Ouvrir le projet';b.onclick=()=>{show('create');renderPreview(p)};item.appendChild(b);items.appendChild(item)})}
+}
+function saveTime(){const time=document.getElementById('time').value,notice=document.getElementById('timeNotice');if(notice)notice.textContent='Préférence enregistrée pour cette session : '+time+'. Aucune publication automatique n’est programmée.'}
 render();
-addVideoButton(box,p);
-};
-
-box.appendChild(validate);
-
-if(p.status==='Script validé'||p.status==='Vidéo créée')addVideoButton(box,p);
-preview.appendChild(box);
-}
-
-function addVideoButton(box,p){
-if(box.querySelector('[data-video]'))return;
-
-const btn=document.createElement('button');
-btn.dataset.video='1';
-btn.style.marginTop='12px';
-btn.textContent='🎬 Créer la vidéo animée';
-btn.onclick=()=>createVideo(p);
-box.appendChild(btn);
-
-const hint=document.createElement('p');
-hint.className='small';
-hint.textContent='Animation simple de texte : pas encore de voix ni de séquences filmées.';
-box.appendChild(hint);
-}
-
-
-function createVideo(p) {
-  if (p.status !== 'Script validé' && p.status !== 'Vidéo créée') {
-    alert('Valide le script avant de créer la vidéo.');
-    return;
-  }
-
-  if (!HTMLCanvasElement.prototype.captureStream || !window.MediaRecorder) {
-    alert('Ton navigateur ne permet pas de créer cette vidéo. Essaie Chrome à jour.');
-    return;
-  }
-
-  const canvas = document.createElement('canvas');
-  canvas.width = 720;
-  canvas.height = 1280;
-
-  const ctx = canvas.getContext('2d');
-  const stream = canvas.captureStream(24);
-
-  let mime = 'video/webm;codecs=vp9';
-  if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm;codecs=vp8';
-  if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm';
-
-  let recorder;
-
-  try {
-    recorder = new MediaRecorder(stream, { mimeType: mime });
-  } catch (e) {
-    alert('Impossible de créer la vidéo dans ce navigateur.');
-    return;
-  }
-
-  const chunks = [];
-  const seconds = Math.min(Math.max(Number(p.duration) || 30, 10), 60);
-  const total = seconds * 24;
-  let frame = 0;
-
-  const script = String(p.script || '');
-  const words = script.split(/\s+/);
-  const lines = [];
-  let line = '';
-
-  ctx.font = '29px Arial';
-
-  words.forEach(word => {
-    const test = line ? line + ' ' + word : word;
-    if (ctx.measureText(test).width > 580 && line) {
-      lines.push(line);
-      line = word;
-    } else {
-      line = test;
-    }
-  });
-
-  if (line) lines.push(line);
-
-  const shown = lines.slice(0, 12);
-  const title = String(p.title || 'Un rappel pour le cœur');
-  const topic = String(p.topic || 'Rappel islamique');
-
-  const scenes = [
-    { sky: '#17152f', middle: '#45336d', ground: '#93664f', accent: '#f7d995' },
-    { sky: '#142b40', middle: '#397080', ground: '#547b68', accent: '#ffe1a0' },
-    { sky: '#35204b', middle: '#80517d', ground: '#d09564', accent: '#fff0bd' },
-    { sky: '#101d35', middle: '#344b72', ground: '#516b65', accent: '#f8df9b' }
-  ];
-
-  function roundedRect(x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.roundRect(x, y, w, h, r);
-  }
-
-  function drawMosque(x, base, scale) {
-    ctx.save();
-    ctx.translate(x, base);
-    ctx.scale(scale, scale);
-    ctx.fillStyle = 'rgba(12,15,35,0.48)';
-
-    ctx.fillRect(-115, -110, 230, 110);
-    ctx.beginPath();
-    ctx.arc(0, -110, 72, Math.PI, 0);
-    ctx.fill();
-
-    ctx.fillRect(-160, -85, 30, 85);
-    ctx.fillRect(130, -85, 30, 85);
-
-    ctx.beginPath();
-    ctx.moveTo(-160, -85);
-    ctx.lineTo(-145, -120);
-    ctx.lineTo(-130, -85);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.moveTo(130, -85);
-    ctx.lineTo(145, -120);
-    ctx.lineTo(160, -85);
-    ctx.fill();
-
-    ctx.fillRect(-15, -220, 30, 110);
-    ctx.beginPath();
-    ctx.arc(0, -220, 15, Math.PI, 0);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.moveTo(0, -265);
-    ctx.lineTo(-10, -235);
-    ctx.lineTo(10, -235);
-    ctx.closePath();
-    ctx.fill();
-
-    ctx.restore();
-  }
-
-  function draw() {
-    const progress = frame / total;
-    const sceneIndex = Math.min(
-      scenes.length - 1,
-      Math.floor(progress * scenes.length)
-    );
-    const scene = scenes[sceneIndex];
-    const localProgress = (progress * scenes.length) % 1;
-
-    const gradient = ctx.createLinearGradient(0, 0, 100, 1280);
-    gradient.addColorStop(0, scene.sky);
-    gradient.addColorStop(0.58, scene.middle);
-    gradient.addColorStop(1, scene.ground);
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 720, 1280);
-
-    // Petites étoiles qui scintillent
-    for (let i = 0; i < 35; i++) {
-      const x = (i * 137 + 43) % 720;
-      const y = (i * 191 + 75) % 410;
-      const size = 1.5 + Math.sin(frame / 12 + i) * 1.2;
-
-      ctx.fillStyle = 'rgba(255,255,255,0.65)';
-      ctx.beginPath();
-      ctx.arc(x, y, Math.max(0.5, size), 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // Lune ou soleil lumineux
-    const orbY = 265 + Math.sin(frame / 30) * 10;
-    const isNight = sceneIndex === 0 || sceneIndex === 3;
-
-    ctx.fillStyle = scene.accent;
-    ctx.globalAlpha = 0.85;
-    ctx.beginPath();
-    ctx.arc(isNight ? 530 : 550, orbY, 43, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.globalAlpha = 1;
-
-    if (isNight) {
-      ctx.fillStyle = scene.sky;
-      ctx.beginPath();
-      ctx.arc(550, orbY - 14, 39, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // Collines en arrière-plan
-    ctx.fillStyle = 'rgba(10,20,35,0.25)';
-    ctx.beginPath();
-    ctx.moveTo(0, 760);
-    ctx.quadraticCurveTo(190, 590, 370, 760);
-    ctx.quadraticCurveTo(550, 630, 720, 745);
-    ctx.lineTo(720, 1280);
-    ctx.lineTo(0, 1280);
-    ctx.closePath();
-    ctx.fill();
-
-    // Silhouette d'une mosquée
-    drawMosque(360, 900, 0.85);
-
-    // Voile sombre pour améliorer la lecture du texte
-    const shade = ctx.createLinearGradient(0, 350, 0, 1050);
-    shade.addColorStop(0, 'rgba(10,10,30,0.05)');
-    shade.addColorStop(1, 'rgba(10,10,30,0.48)');
-    ctx.fillStyle = shade;
-    ctx.fillRect(0, 350, 720, 700);
-
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    ctx.fillStyle = scene.accent;
-    ctx.font = 'bold 28px Arial';
-    ctx.fillText('☾ RAPPEL ISLAMIQUE ☽', 360, 105);
-
-    // Titre sur plusieurs lignes
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 43px Arial';
-
-    const titleLines = [];
-    let titleLine = '';
-
-    title.split(/\s+/).forEach(word => {
-      const test = titleLine ? titleLine + ' ' + word : word;
-      if (ctx.measureText(test).width > 590 && titleLine) {
-        titleLines.push(titleLine);
-        titleLine = word;
-      } else {
-        titleLine = test;
-      }
-    });
-
-    if (titleLine) titleLines.push(titleLine);
-
-    titleLines.slice(0, 3).forEach((text, i) => {
-      ctx.fillText(text, 360, 405 + i * 55);
-    });
-
-    ctx.fillStyle = scene.accent;
-    ctx.font = 'bold 25px Arial';
-    ctx.fillText(topic.slice(0, 42), 360, 590);
-
-    // Texte réparti sur plusieurs lignes
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '28px Arial';
-
-    const visibleCount = Math.max(
-      1,
-      Math.ceil(shown.length * Math.min(1, progress * 1.8 + 0.15))
-    );
-
-    shown.slice(0, visibleCount).forEach((text, i) => {
-      ctx.fillText(text, 360, 670 + i * 39);
-    });
-
-    ctx.fillStyle = scene.accent;
-    ctx.font = 'bold 23px Arial';
-    ctx.fillText('Rappelle-toi et partage le bien', 360, 1135);
-
-    // Barre de progression
-    ctx.fillStyle = 'rgba(255,255,255,0.45)';
-    ctx.fillRect(60, 1200, 600, 7);
-
-    ctx.fillStyle = scene.accent;
-    ctx.fillRect(60, 1200, 600 * progress, 7);
-
-    frame++;
-
-    if (frame < total) {
-      requestAnimationFrame(draw);
-    } else {
-      recorder.stop();
-    }
-  }
-
-  recorder.ondataavailable = e => {
-    if (e.data && e.data.size) chunks.push(e.data);
-  };
-
-  recorder.onstop = () => {
-    stream.getTracks().forEach(track => track.stop());
-
-    const blob = new Blob(chunks, { type: 'video/webm' });
-
-    if (currentVideoUrl) URL.revokeObjectURL(currentVideoUrl);
-    currentVideoUrl = URL.createObjectURL(blob);
-
-    p.status = 'Vidéo créée';
-    saveProjects();
-    render();
-
-    const result = document.createElement('div');
-    result.className = 'card';
-
-    const heading = document.createElement('h2');
-    heading.textContent = 'Ta vidéo est prête 🎉';
-    result.appendChild(heading);
-
-    const video = document.createElement('video');
-    video.controls = true;
-    video.playsInline = true;
-    video.src = currentVideoUrl;
-    video.style.width = '100%';
-    video.style.borderRadius = '14px';
-    result.appendChild(video);
-
-    const link = document.createElement('a');
-    link.href = currentVideoUrl;
-    link.download = 'autocreator-rappel-islamique.webm';
-    link.textContent = '📥 Télécharger la vidéo';
-    link.style.display = 'inline-block';
-    link.style.marginTop = '14px';
-    result.appendChild(link);
-
-    const note = document.createElement('p');
-    note.className = 'small';
-    note.textContent =
-      'Vidéo WebM avec plusieurs scènes illustrées. Ajoute ta voix et exporte en MP4 dans CapCut.';
-    result.appendChild(note);
-
-    const preview = document.getElementById('preview');
-    preview.appendChild(result);
-    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  recorder.start();
-  draw();
-} 
-
-function render() {
-  const count = document.getElementById('count');
-  const pending = document.getElementById('pending');
-  const items = document.getElementById('items');
-
-  if (count) count.textContent = projects.length;
-
-  if (pending) {
-    pending.textContent = projects.filter(
-      p => p.status === 'À valider'
-    ).length;
-  }
-
-  if (items) {
-    items.innerHTML = '';
-
-    if (projects.length === 0) {
-      items.textContent = 'Aucun projet pour le moment.';
-    } else {
-      projects.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'item';
-
-        const title = document.createElement('strong');
-        title.textContent = p.title;
-        item.appendChild(title);
-
-        const info = document.createElement('p');
-        info.textContent = p.topic + ' · ' + p.status;
-        item.appendChild(info);
-
-        const btn = document.createElement('button');
-        btn.textContent = 'Ouvrir le projet';
-        btn.onclick = () => {
-          show('create');
-          renderPreview(p);
-        };
-
-        item.appendChild(btn);
-        items.appendChild(item);
-      });
-    }
-  }
-}
-
-function saveTime() {
-  const time = document.getElementById('time').value;
-  const notice = document.getElementById('timeNotice');
-
-  if (notice) {
-    notice.textContent =
-      'Préférence enregistrée pour cette session : ' + time +
-      '. Aucune publication automatique n’est programmée.';
-  }
-}
-
-render();
-
 </script>
 </body>
 </html>
-
-            
-
