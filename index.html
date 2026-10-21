@@ -15,7 +15,7 @@ button{border:0;border-radius:10px;padding:13px 16px;background:#6d55d9;color:wh
 .stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat div{background:#eeeafd;padding:14px;border-radius:12px}
 .small{font-size:13px;color:#77718e;line-height:1.5}nav{display:flex;gap:7px;overflow:auto;padding:10px 0}nav button{white-space:nowrap;padding:10px;font-size:13px}
 .view{display:none}.view.active{display:block}.item{border-bottom:1px solid #eee;padding:12px 0}footer{text-align:center;padding:20px;color:#77718e;font-size:12px}
-video{width:100%;max-width:420px;background:#17132c;border-radius:12px;display:block;margin-top:12px}a{color:#5941bd}
+video{width:100%;max-width:420px;background:#17132c;border-radius:12px;display:block;margin-top:12px}a{color:#5941bd}.notice{padding:12px;border-radius:10px;background:#fff8df;color:#624d13;font-size:13px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -25,10 +25,10 @@ video{width:100%;max-width:420px;background:#17132c;border-radius:12px;display:b
 <button onclick="show('home')">Accueil</button><button onclick="show('create')">Créer</button><button onclick="show('calendar')">Calendrier</button><button onclick="show('history')">Historique</button><button onclick="show('accounts')">Mes réseaux</button>
 </nav>
 <section id="home" class="view active">
-<div class="card"><h2>Bienvenue dans ton studio 🌙</h2><p>Prépare un rappel islamique, vérifie-le, puis valide-le avant de créer une vidéo téléchargeable.</p>
+<div class="card"><h2>Bienvenue dans ton studio 🌙</h2><p>Prépare un rappel islamique, génère une voix correspondant au script, vérifie le résultat, puis valide avant publication.</p>
 <div class="stat"><div><strong id="count">0</strong><br>Projets enregistrés</div><div><strong id="pending">0</strong><br>À valider</div></div>
 <div class="actions"><button onclick="show('create')">＋ Créer une vidéo</button></div></div>
-<div class="card"><h2>Comment ça marche ?</h2><p>① Choisis un thème et relis le texte.</p><p>② Écoute le texte avec une voix française disponible sur ton téléphone.</p><p>③ Valide le script et crée la vidéo.</p><p>④ Pour inclure une voix dans la vidéo, ajoute un fichier audio dans la section Voix off.</p><p class="small">La lecture vocale du navigateur sert à écouter le texte. Pour enregistrer la voix dans le fichier vidéo, un fichier audio doit être fourni : le navigateur ne permet pas de capturer directement la voix de synthèse.</p></div>
+<div class="card"><h2>Comment ça marche ?</h2><p>① Prépare et relis ton script.</p><p>② Copie automatiquement ce script vers l'outil de voix, puis télécharge l'audio correspondant.</p><p>③ Importe ce nouvel audio dans AutoCreator AI.</p><p>④ Valide le script et crée la vidéo.</p><p class="notice">Important : une page web gratuite ne peut pas fabriquer et télécharger une voix MP3 automatiquement à partir de la voix du téléphone. Cette version automatise la préparation et la copie du texte, mais la conversion et le téléchargement de l'audio restent à faire sur TTSMaker. Aucune publication sur TikTok ou YouTube ne se fera sans intégration officielle et autorisation.</p></div>
 </section>
 <section id="create" class="view"><div class="card">
 <h2>Créer un rappel islamique</h2>
@@ -36,21 +36,24 @@ video{width:100%;max-width:420px;background:#17132c;border-radius:12px;display:b
 <label for="topic">Thème</label><select id="topic"><option>Gratitude envers Allah</option><option>La prière</option><option>La patience dans les épreuves</option><option>Le repentir</option><option>Le respect des parents</option><option>Enseignements du Coran</option><option>Rappel du vendredi</option></select>
 <label for="duration">Durée souhaitée</label><select id="duration"><option value="30">30 secondes</option><option value="45" selected>45 secondes</option><option value="60">60 secondes</option></select>
 <label for="script">Script du rappel</label><textarea id="script" rows="6">Prenons un instant pour remercier Allah pour la vie, chaque nouvelle journée et les occasions de faire le bien. Que nos cœurs restent reconnaissants et que nos actions reflètent cette gratitude.</textarea>
-<div class="card"><h2>🎙️ Voix off française</h2><p class="small">Écoute ton texte avec une voix française installée sur ton téléphone. Pour inclure une voix dans la vidéo téléchargée, ajoute un fichier audio préenregistré (MP3, M4A ou WAV). La voix de synthèse du navigateur ne peut pas être enregistrée directement dans la vidéo.</p>
-<div class="actions"><button type="button" onclick="speakScript()">🔊 Écouter le rappel</button><button type="button" class="secondary" onclick="stopSpeaking()">⏹ Arrêter la voix</button></div>
-<p id="voiceStatus" class="small" aria-live="polite">La voix entendue dépend des voix installées sur ton téléphone.</p>
-<label for="voiceAudio">Fichier audio à intégrer à la vidéo (facultatif)</label><input id="voiceAudio" type="file" accept="audio/*">
-<p class="small">Choisis un audio qui dure environ autant que la vidéo (30, 45 ou 60 secondes). Sans fichier audio, la vidéo sera silencieuse, mais tu peux écouter le texte sur cette page.</p></div>
+<div class="card"><h2>🎙️ Voix off française</h2>
+<p class="small">Cette méthode évite d'utiliser par erreur l'audio d'une ancienne vidéo : copie le script actuel dans TTSMaker, télécharge le nouvel audio, puis sélectionne-le ci-dessous.</p>
+<div class="actions"><button type="button" onclick="speakScript()">🔊 Écouter le texte</button><button type="button" class="secondary" onclick="stopSpeaking()">⏹ Arrêter</button></div>
+<div class="actions"><button type="button" onclick="copyScriptForTTS()">1. Copier le script pour la voix</button><button type="button" class="secondary" onclick="openTTSMaker()">2. Ouvrir TTSMaker</button></div>
+<p id="voiceStatus" class="small" aria-live="polite">Étape voix : copie le script, crée l'audio sur TTSMaker, puis importe le fichier ici.</p>
+<label for="voiceAudio">3. Sélectionner le nouvel audio (MP3, M4A ou WAV)</label><input id="voiceAudio" type="file" accept="audio/*">
+<p id="audioStatus" class="small">Aucun audio sélectionné.</p>
+</div>
 <div class="actions"><button onclick="prepare()">Préparer le projet</button><button class="secondary" onclick="clearScript()">Effacer le script</button></div>
 <p id="notice" class="small">Relis le texte et vérifie les références religieuses avant publication.</p><div id="preview"></div>
 </div></section>
 <section id="calendar" class="view"><div class="card"><h2>Calendrier éditorial</h2><label for="time">Heure souhaitée</label><select id="time"><option>12:00</option><option>15:00</option><option selected>18:00</option><option>20:00</option><option>21:00</option></select><label for="frequency">Fréquence</label><input id="frequency" value="1 vidéo par jour" readonly><button onclick="saveTime()">Enregistrer la préférence</button><p id="timeNotice" class="small">Horaire indicatif uniquement : aucune publication automatique.</p></div></section>
 <section id="history" class="view"><div class="card"><h2>Historique des projets</h2><div id="items">Aucun projet pour le moment.</div></div></section>
 <section id="accounts" class="view"><div class="card"><h2>Connexion officielle</h2><p>Les comptes ne sont pas connectés. Ne saisis jamais tes mots de passe ici.</p><div class="item"><strong>YouTube</strong><p class="small">Une intégration OAuth et l'API YouTube seront nécessaires pour publier.</p><a href="https://developers.google.com/youtube/v3/guides/authentication" target="_blank" rel="noopener">Documentation officielle YouTube</a></div><div class="item"><strong>TikTok</strong><p class="small">Une application développeur et des autorisations sont nécessaires.</p><a href="https://developers.tiktok.com/doc/content-posting-api-get-started/" target="_blank" rel="noopener">Documentation officielle TikTok</a></div></div></section>
-<footer>AutoCreator AI · Prototype local. Les projets sont enregistrés dans le stockage de ce navigateur sur cet appareil.</footer>
+<footer>AutoCreator AI · Prototype. Les projets sont enregistrés dans le stockage de ce navigateur sur cet appareil.</footer>
 </main>
 <script>
-const KEY='autocreator_ai_projects_v2';let projects=[];let currentVideoUrl=null;
+const KEY='autocreator_ai_projects_v3';let projects=[];let currentVideoUrl=null;
 try{projects=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(projects))projects=[]}catch(e){projects=[]}
 function saveProjects(){try{localStorage.setItem(KEY,JSON.stringify(projects))}catch(e){alert("Le navigateur n'a pas pu enregistrer les projets.")}}
 function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));const el=document.getElementById(id);if(el)el.classList.add('active');if(id==='history')render()}
@@ -60,16 +63,27 @@ function speakScript(){
  const txt=document.getElementById('script').value.trim();if(!txt){alert("Écris d'abord le texte du rappel.");return}
  window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='fr-FR';u.rate=.92;u.pitch=1.08;
  const voices=window.speechSynthesis.getVoices();const fr=voices.filter(v=>/^fr([-_]|$)/i.test(v.lang));const chosen=fr.find(v=>/female|femme|audrey|amelie|julie|marie|celine|lea|hortense|denise/i.test(v.name));u.voice=chosen||fr[0]||null;
- u.onstart=()=>document.getElementById('voiceStatus').textContent='Lecture en cours. La voix dépend des voix disponibles sur ton téléphone.';
+ u.onstart=()=>document.getElementById('voiceStatus').textContent='Lecture en cours avec la voix française disponible sur ton téléphone.';
  u.onend=()=>document.getElementById('voiceStatus').textContent='Lecture terminée.';
  u.onerror=()=>document.getElementById('voiceStatus').textContent='Échec de la lecture. Vérifie les voix françaises du téléphone.';
  window.speechSynthesis.speak(u)
 }
 function stopSpeaking(){if('speechSynthesis'in window)window.speechSynthesis.cancel();const el=document.getElementById('voiceStatus');if(el)el.textContent='Lecture arrêtée.'}
+async function copyScriptForTTS(){
+ const txt=document.getElementById('script').value.trim();if(!txt){alert('Écris d’abord le script.');return}
+ try{await navigator.clipboard.writeText(txt);document.getElementById('voiceStatus').textContent='Script copié ! Ouvre TTSMaker, colle le texte, choisis Français et une voix féminine, puis télécharge le nouvel audio.'}
+ catch(e){const ta=document.getElementById('script');ta.focus();ta.select();try{document.execCommand('copy');document.getElementById('voiceStatus').textContent='Script copié. Si le message ne s’affiche pas, sélectionne le texte et copie-le manuellement.'}catch(err){alert('Sélectionne le script et copie-le manuellement.');}}
+}
+function openTTSMaker(){window.open('https://ttsmaker.com/fra','_blank','noopener');document.getElementById('voiceStatus').textContent='TTSMaker est ouvert. Colle le script actuel, convertis-le en audio, télécharge-le puis reviens ici pour sélectionner ce fichier.'}
+document.getElementById('voiceAudio').addEventListener('change',function(){
+ const f=this.files[0],el=document.getElementById('audioStatus');
+ if(!f){el.textContent='Aucun audio sélectionné.';return}
+ el.textContent='Audio choisi : '+f.name+'. Vérifie que tu viens de le créer à partir du script affiché ci-dessus.';
+});
 function prepare(){
  const title=document.getElementById('title').value.trim(),topic=document.getElementById('topic').value,script=document.getElementById('script').value.trim(),duration=Number(document.getElementById('duration').value);
  if(!title||!script){alert('Ajoute un titre et un script.');return}
- const p={id:Date.now(),title,topic,script,duration,status:'À valider',createdAt:new Date().toISOString()};projects.unshift(p);saveProjects();render();renderPreview(p);document.getElementById('notice').textContent='Projet préparé. Relis le texte avant de le valider.'
+ const p={id:Date.now(),title,topic,script,duration,status:'À valider',createdAt:new Date().toISOString()};projects.unshift(p);saveProjects();render();renderPreview(p);document.getElementById('notice').textContent='Projet préparé. Relis le texte et valide-le avant de créer la vidéo.'
 }
 function renderPreview(p){
  const preview=document.getElementById('preview');preview.innerHTML='';const box=document.createElement('div');box.className='card';
@@ -81,11 +95,14 @@ function renderPreview(p){
  validate.onclick=()=>{p.status='Script validé';saveProjects();status.textContent='Script validé. Tu peux créer la vidéo.';validate.disabled=true;render();addVideoButton(box,p)};
  box.appendChild(validate);if(p.status==='Script validé'||p.status==='Vidéo créée')addVideoButton(box,p);preview.appendChild(box)
 }
-function addVideoButton(box,p){if(box.querySelector('[data-video]'))return;const b=document.createElement('button');b.dataset.video='1';b.style.marginTop='12px';b.textContent='🎬 Créer la vidéo animée';b.onclick=()=>createVideo(p);box.appendChild(b);const hint=document.createElement('p');hint.className='small';hint.textContent='La vidéo inclura le fichier audio choisi. Sans fichier audio, elle sera silencieuse.';box.appendChild(hint)}
+function addVideoButton(box,p){if(box.querySelector('[data-video]'))return;const b=document.createElement('button');b.dataset.video='1';b.style.marginTop='12px';b.textContent='🎬 Créer la vidéo animée';b.onclick=()=>createVideo(p);box.appendChild(b);const hint=document.createElement('p');hint.className='small';hint.textContent='Avant de créer la vidéo, sélectionne un audio créé à partir de ce script précis. Sinon, la vidéo sera silencieuse.';box.appendChild(hint)}
 async function createVideo(p){
  if(p.status!=='Script validé'&&p.status!=='Vidéo créée'){alert('Valide le script avant de créer la vidéo.');return}
+ const file=document.getElementById('voiceAudio').files[0]||null;
+ if(!file){if(!confirm('Aucun fichier audio sélectionné. La vidéo sera silencieuse. Veux-tu continuer ?'))return}
+ else if(!confirm('As-tu bien créé cet audio à partir du script exact affiché pour ce projet ? Si tu as gardé un ancien audio, la voix dira l’ancien texte.'))return;
  if(!HTMLCanvasElement.prototype.captureStream||!window.MediaRecorder){alert('Ton navigateur ne permet pas de créer cette vidéo. Essaie Chrome à jour.');return}
- const file=document.getElementById('voiceAudio').files[0]||null,canvas=document.createElement('canvas');canvas.width=720;canvas.height=1280;
+ const canvas=document.createElement('canvas');canvas.width=720;canvas.height=1280;
  const ctx=canvas.getContext('2d'),stream=canvas.captureStream(24);let audio=null,audioCtx=null,audioUrl=null,audioDuration=0;
  if(file){
   try{
@@ -122,7 +139,7 @@ async function createVideo(p){
   const result=document.createElement('div');result.className='card';const h=document.createElement('h2');h.textContent='Ta vidéo est prête 🎉';result.appendChild(h);
   const v=document.createElement('video');v.controls=true;v.playsInline=true;v.src=currentVideoUrl;result.appendChild(v);
   const a=document.createElement('a');a.href=currentVideoUrl;a.download='autocreator-rappel-islamique.webm';a.textContent='📥 Télécharger la vidéo';a.style.display='inline-block';a.style.marginTop='14px';result.appendChild(a);
-  const note=document.createElement('p');note.className='small';note.textContent=file?'Vidéo avec la piste audio choisie. Écoute-la avant publication.':'Vidéo sans voix intégrée. Utilise Écouter le rappel pour la lecture vocale, ou ajoute un fichier audio pour l’inclure au prochain rendu.';result.appendChild(note);
+  const note=document.createElement('p');note.className='small';note.textContent=file?'Vidéo avec la piste audio sélectionnée. Écoute-la attentivement avant publication.':'Vidéo sans voix intégrée. Ajoute un fichier audio pour obtenir une version parlée.';result.appendChild(note);
   const preview=document.getElementById('preview');preview.appendChild(result);result.scrollIntoView({behavior:'smooth',block:'start'})
  };
  recorder.start();
