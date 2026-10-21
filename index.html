@@ -551,7 +551,69 @@ function createVideo(p) {
 
   recorder.start();
   draw();
+} 
+
+function render() {
+  const count = document.getElementById('count');
+  const pending = document.getElementById('pending');
+  const items = document.getElementById('items');
+
+  if (count) count.textContent = projects.length;
+
+  if (pending) {
+    pending.textContent = projects.filter(
+      p => p.status === 'À valider'
+    ).length;
+  }
+
+  if (items) {
+    items.innerHTML = '';
+
+    if (projects.length === 0) {
+      items.textContent = 'Aucun projet pour le moment.';
+    } else {
+      projects.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'item';
+
+        const title = document.createElement('strong');
+        title.textContent = p.title;
+        item.appendChild(title);
+
+        const info = document.createElement('p');
+        info.textContent = p.topic + ' · ' + p.status;
+        item.appendChild(info);
+
+        const btn = document.createElement('button');
+        btn.textContent = 'Ouvrir le projet';
+        btn.onclick = () => {
+          show('create');
+          renderPreview(p);
+        };
+
+        item.appendChild(btn);
+        items.appendChild(item);
+      });
+    }
+  }
 }
+
+function saveTime() {
+  const time = document.getElementById('time').value;
+  const notice = document.getElementById('timeNotice');
+
+  if (notice) {
+    notice.textContent =
+      'Préférence enregistrée pour cette session : ' + time +
+      '. Aucune publication automatique n’est programmée.';
+  }
+}
+
+render();
+
+</script>
+</body>
+</html>
 
             
 
