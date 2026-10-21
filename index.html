@@ -3,154 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#211b3b">
 <title>AutoCreator AI</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f3fc;color:#24213b;font-family:Arial,sans-serif}
-header{background:#211b3b;color:white;padding:24px 18px}header h1{margin:0 0 8px;font-size:26px}header p{margin:0;color:#ded7ff}
-main{max-width:750px;margin:auto;padding:16px}.card{background:white;border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 3px 14px #211b3b0d}
-h2{font-size:19px;margin-top:0}label{display:block;font-weight:bold;margin:12px 0 7px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #d7d2e6;border-radius:9px;font-size:16px;background:white}
-button{border:0;border-radius:10px;padding:13px 16px;background:#6d55d9;color:white;font-size:15px;font-weight:bold;cursor:pointer}button:disabled{opacity:.55}
-.secondary{background:#eeeafd;color:#44368b}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat div{background:#eeeafd;padding:14px;border-radius:12px}
-.small{font-size:13px;color:#77718e;line-height:1.5}nav{display:flex;gap:7px;overflow:auto;padding:10px 0}nav button{white-space:nowrap;padding:10px;font-size:13px}
-.view{display:none}.view.active{display:block}.item{border-bottom:1px solid #eee;padding:12px 0}footer{text-align:center;padding:20px;color:#77718e;font-size:12px}
-video{width:100%;max-width:420px;background:#17132c;border-radius:12px;display:block;margin-top:12px}a{color:#5941bd}.notice{padding:12px;border-radius:10px;background:#fff8df;color:#624d13;font-size:13px;line-height:1.5}
+*{box-sizing:border-box}body{margin:0;background:#f5f3fc;color:#24213b;font-family:Arial,sans-serif}header{background:#211b3b;color:white;padding:22px 18px}header h1{margin:0 0 8px;font-size:26px}header p{margin:0;color:#ded7ff}main{max-width:760px;margin:auto;padding:14px}.card{background:white;border-radius:16px;padding:17px;margin:13px 0;box-shadow:0 3px 14px #211b3b0d}h2{font-size:19px;margin:0 0 12px}label{display:block;font-weight:bold;margin:12px 0 7px}input,select,textarea{width:100%;padding:12px;border:1px solid #d7d2e6;border-radius:9px;font-size:16px;background:white;color:#24213b}textarea{line-height:1.5}button{border:0;border-radius:10px;padding:12px 14px;background:#6d55d9;color:white;font-size:14px;font-weight:bold;cursor:pointer}button:disabled{opacity:.5}.secondary{background:#eeeafd;color:#44368b}.danger{background:#fce8e8;color:#922}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.actions button{flex:1 1 145px}.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat div{background:#eeeafd;padding:13px;border-radius:12px}.small{font-size:13px;color:#77718e;line-height:1.5}nav{display:flex;gap:7px;overflow:auto;padding:8px 0}nav button{white-space:nowrap;padding:10px;font-size:13px}.view{display:none}.view.active{display:block}.item{border-bottom:1px solid #eee;padding:12px 0}footer{text-align:center;padding:20px;color:#77718e;font-size:12px}video{width:100%;max-width:420px;background:#17132c;border-radius:12px;display:block;margin-top:12px}a{color:#5941bd}.notice{padding:12px;border-radius:10px;background:#fff8df;color:#624d13;font-size:13px;line-height:1.5}.good{background:#e8f5e9;color:#225d32;padding:10px;border-radius:9px}.step{padding:12px;background:#f8f6ff;border-radius:10px;margin:8px 0}.hidden{display:none!important}
 </style>
 </head>
 <body>
-<header><h1>✨ AutoCreator AI</h1><p>Ton studio de rappels islamiques</p><p style="margin-top:14px;font-size:13px">PROTOTYPE · Validation obligatoire</p></header>
+<header><h1>✨ AutoCreator AI</h1><p>Ton studio de rappels islamiques</p><p style="margin-top:12px;font-size:13px">VERSION GRATUITE · Validation avant publication</p></header>
 <main>
 <nav>
 <button onclick="show('home')">Accueil</button><button onclick="show('create')">Créer</button><button onclick="show('calendar')">Calendrier</button><button onclick="show('history')">Historique</button><button onclick="show('accounts')">Mes réseaux</button>
 </nav>
 <section id="home" class="view active">
-<div class="card"><h2>Bienvenue dans ton studio 🌙</h2><p>Prépare un rappel islamique, génère une voix correspondant au script, vérifie le résultat, puis valide avant publication.</p>
-<div class="stat"><div><strong id="count">0</strong><br>Projets enregistrés</div><div><strong id="pending">0</strong><br>À valider</div></div>
-<div class="actions"><button onclick="show('create')">＋ Créer une vidéo</button></div></div>
-<div class="card"><h2>Comment ça marche ?</h2><p>① Prépare et relis ton script.</p><p>② Copie automatiquement ce script vers l'outil de voix, puis télécharge l'audio correspondant.</p><p>③ Importe ce nouvel audio dans AutoCreator AI.</p><p>④ Valide le script et crée la vidéo.</p><p class="notice">Important : une page web gratuite ne peut pas fabriquer et télécharger une voix MP3 automatiquement à partir de la voix du téléphone. Cette version automatise la préparation et la copie du texte, mais la conversion et le téléchargement de l'audio restent à faire sur TTSMaker. Aucune publication sur TikTok ou YouTube ne se fera sans intégration officielle et autorisation.</p></div>
+<div class="card"><h2>Bienvenue dans ton studio 🌙</h2><p>Prépare ton rappel, génère la voix, crée une vidéo verticale et vérifie le résultat avant de le publier.</p><div class="stat"><div><strong id="count">0</strong><br>Projets enregistrés</div><div><strong id="pending">0</strong><br>À valider</div></div><div class="actions"><button onclick="show('create')">＋ Créer une vidéo</button></div></div>
+<div class="card"><h2>Ce qui est automatisé</h2><div class="step">✅ Préparer un brouillon de rappel à partir du thème choisi.</div><div class="step">✅ Copier le script et ouvrir l’outil de voix.</div><div class="step">✅ Composer une vidéo verticale et y intégrer l’audio importé.</div><div class="step">✅ Enregistrer les projets sur cet appareil et télécharger la vidéo.</div><p class="notice"><b>Limites gratuites :</b> cette page seule ne peut pas demander à TTSMaker de convertir et télécharger automatiquement le MP3. La création de la voix sur le site externe reste manuelle. La publication automatique exige les API officielles, une configuration développeur et ton autorisation. Les projets sont conservés dans le navigateur de cet appareil : effacer ses données peut les supprimer.</p></div>
 </section>
 <section id="create" class="view"><div class="card">
-<h2>Créer un rappel islamique</h2>
-<label for="title">Titre</label><input id="title" value="Le pouvoir de dire Alhamdoulillah">
-<label for="topic">Thème</label><select id="topic"><option>Gratitude envers Allah</option><option>La prière</option><option>La patience dans les épreuves</option><option>Le repentir</option><option>Le respect des parents</option><option>Enseignements du Coran</option><option>Rappel du vendredi</option></select>
-<label for="duration">Durée souhaitée</label><select id="duration"><option value="30">30 secondes</option><option value="45" selected>45 secondes</option><option value="60">60 secondes</option></select>
-<label for="script">Script du rappel</label><textarea id="script" rows="6">Prenons un instant pour remercier Allah pour la vie, chaque nouvelle journée et les occasions de faire le bien. Que nos cœurs restent reconnaissants et que nos actions reflètent cette gratitude.</textarea>
-<div class="card"><h2>🎙️ Voix off française</h2>
-<p class="small">Cette méthode évite d'utiliser par erreur l'audio d'une ancienne vidéo : copie le script actuel dans TTSMaker, télécharge le nouvel audio, puis sélectionne-le ci-dessous.</p>
-<div class="actions"><button type="button" onclick="speakScript()">🔊 Écouter le texte</button><button type="button" class="secondary" onclick="stopSpeaking()">⏹ Arrêter</button></div>
-<div class="actions"><button type="button" onclick="copyScriptForTTS()">1. Copier le script pour la voix</button><button type="button" class="secondary" onclick="openTTSMaker()">2. Ouvrir TTSMaker</button></div>
-<p id="voiceStatus" class="small" aria-live="polite">Étape voix : copie le script, crée l'audio sur TTSMaker, puis importe le fichier ici.</p>
-<label for="voiceAudio">3. Sélectionner le nouvel audio (MP3, M4A ou WAV)</label><input id="voiceAudio" type="file" accept="audio/*">
-<p id="audioStatus" class="small">Aucun audio sélectionné.</p>
+<h2>1. Préparer le rappel</h2>
+<label for="title">Titre</label><input id="title" value="Le pouvoir de dire Alhamdoulillah" maxlength="100">
+<label for="topic">Thème</label><select id="topic"><option>Gratitude envers Allah</option><option>La prière</option><option>La patience dans les épreuves</option><option>Le repentir</option><option>Le respect des parents</option><option>Rappel du vendredi</option><option>La confiance en Allah</option><option>La bienveillance</option></select>
+<label for="duration">Durée visée de la vidéo</label><select id="duration"><option value="30">30 secondes</option><option value="45" selected>45 secondes</option><option value="60">60 secondes</option></select>
+<div class="actions"><button class="secondary" onclick="generateDraft()">✨ Préparer un brouillon</button><button class="secondary" onclick="clearScript()">Effacer le texte</button></div>
+<label for="script">Script du rappel</label><textarea id="script" rows="7" maxlength="3000">Prenons un instant pour remercier Allah pour la vie, chaque nouvelle journée et les occasions de faire le bien. Que nos cœurs restent reconnaissants et que nos actions reflètent cette gratitude.</textarea>
+<p class="small">Le brouillon est une aide à la rédaction, pas une fatwa. Vérifie toute citation du Coran ou tout hadith avec une source fiable avant publication. Les modèles ci-dessous n’inventent pas de références religieuses.</p>
+<div class="actions"><button onclick="prepare()">Enregistrer et prévisualiser le projet</button></div>
+<div id="preview"></div>
 </div>
-<div class="actions"><button onclick="prepare()">Préparer le projet</button><button class="secondary" onclick="clearScript()">Effacer le script</button></div>
-<p id="notice" class="small">Relis le texte et vérifie les références religieuses avant publication.</p><div id="preview"></div>
-</div></section>
-<section id="calendar" class="view"><div class="card"><h2>Calendrier éditorial</h2><label for="time">Heure souhaitée</label><select id="time"><option>12:00</option><option>15:00</option><option selected>18:00</option><option>20:00</option><option>21:00</option></select><label for="frequency">Fréquence</label><input id="frequency" value="1 vidéo par jour" readonly><button onclick="saveTime()">Enregistrer la préférence</button><p id="timeNotice" class="small">Horaire indicatif uniquement : aucune publication automatique.</p></div></section>
-<section id="history" class="view"><div class="card"><h2>Historique des projets</h2><div id="items">Aucun projet pour le moment.</div></div></section>
-<section id="accounts" class="view"><div class="card"><h2>Connexion officielle</h2><p>Les comptes ne sont pas connectés. Ne saisis jamais tes mots de passe ici.</p><div class="item"><strong>YouTube</strong><p class="small">Une intégration OAuth et l'API YouTube seront nécessaires pour publier.</p><a href="https://developers.google.com/youtube/v3/guides/authentication" target="_blank" rel="noopener">Documentation officielle YouTube</a></div><div class="item"><strong>TikTok</strong><p class="small">Une application développeur et des autorisations sont nécessaires.</p><a href="https://developers.tiktok.com/doc/content-posting-api-get-started/" target="_blank" rel="noopener">Documentation officielle TikTok</a></div></div></section>
-<footer>AutoCreator AI · Prototype. Les projets sont enregistrés dans le stockage de ce navigateur sur cet appareil.</footer>
+<div class="card"><h2>2. Créer la voix off</h2>
+<p class="small">Pour une voix française féminine, choisis une voix disponible sur le service vocal. Le navigateur peut lire le texte, mais sa lecture ne peut pas être enregistrée directement dans la vidéo par cette page.</p>
+<div class="actions"><button type="button" onclick="speakScript()">🔊 Écouter sur le téléphone</button><button type="button" class="secondary" onclick="stopSpeaking()">⏹ Arrêter</button></div>
+<div class="actions"><button type="button" onclick="copyScriptForTTS()">1. Copier le script</button><button type="button" class="secondary" onclick="openTTSMaker()">2. Ouvrir TTSMaker</button></div>
+<p id="voiceStatus" class="small" aria-live="polite">Étape voix : copie le script actuel, convertis-le sur TTSMaker, télécharge l’audio puis importe-le ici.</p>
+<label for="voiceAudio">3. Importer l’audio correspondant au script (MP3, M4A ou WAV)</label><input id="voiceAudio" type="file" accept="audio/*">
+<p id="audioStatus" class="small">Aucun audio sélectionné.</p>
+<audio id="audioCheck" controls class="hidden" style="width:100%;margin-top:8px"></audio>
+<div class="actions"><button class="secondary" onclick="clearAudio()">Retirer l’audio</button></div>
+</div>
+</section>
+<section id="calendar" class="view"><div class="card"><h2>Calendrier éditorial</h2><label for="time">Heure souhaitée</label><select id="time"><option>12:00</option><option>15:00</option><option selected>18:00</option><option>20:00</option><option>21:00</option></select><label for="frequency">Fréquence</label><input id="frequency" value="1 vidéo par jour" readonly><button style="margin-top:12px" onclick="saveTime()">Enregistrer la préférence</button><p id="timeNotice" class="small">Horaire indicatif uniquement : aucune publication automatique n’est programmée.</p></div></section>
+<section id="history" class="view"><div class="card"><h2>Historique des projets</h2><div id="items">Aucun projet pour le moment.</div><div class="actions"><button class="secondary" onclick="exportProjects()">Exporter la liste des projets</button></div></div></section>
+<section id="accounts" class="view"><div class="card"><h2>Mes réseaux</h2><p>Les comptes ne sont pas connectés. Ne saisis jamais tes mots de passe dans cette page.</p><div class="item"><strong>YouTube</strong><p class="small">La publication par API demande une configuration Google Cloud, OAuth et les autorisations nécessaires. Le statut d’accès peut dépendre du projet.</p><a href="https://developers.google.com/youtube/v3/guides/authentication" target="_blank" rel="noopener">Documentation officielle YouTube</a></div><div class="item"><strong>TikTok</strong><p class="small">Il faut une application développeur, les permissions approuvées et le flux officiel de publication. Une simple page HTML ne peut pas publier en contournant ces étapes.</p><a href="https://developers.tiktok.com/doc/content-posting-api-get-started/" target="_blank" rel="noopener">Documentation officielle TikTok</a></div><p class="notice">Pour commencer sans frais ni configuration complexe : télécharge la vidéo, puis publie-la toi-même dans l’application choisie.</p></div></section>
+<footer>AutoCreator AI · Prototype gratuit. Les fichiers audio et vidéos sont traités localement dans le navigateur.</footer>
 </main>
 <script>
-const KEY='autocreator_ai_projects_v3';let projects=[];let currentVideoUrl=null;
-try{projects=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(projects))projects=[]}catch(e){projects=[]}
-function saveProjects(){try{localStorage.setItem(KEY,JSON.stringify(projects))}catch(e){alert("Le navigateur n'a pas pu enregistrer les projets.")}}
+const KEY='autocreator_ai_projects_v4';let projects=[];let currentVideoUrl=null;let selectedAudioUrl=null;let latestProjectId=null;
+try{const saved=localStorage.getItem(KEY)||localStorage.getItem('autocreator_ai_projects_v3')||'[]';projects=JSON.parse(saved);if(!Array.isArray(projects))projects=[];if(!localStorage.getItem(KEY)&&projects.length)localStorage.setItem(KEY,JSON.stringify(projects))}catch(e){projects=[]}
+function saveProjects(){try{localStorage.setItem(KEY,JSON.stringify(projects))}catch(e){alert("Le navigateur n’a pas pu enregistrer les projets. Exporte ta liste et libère de l’espace si nécessaire.")}}
 function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));const el=document.getElementById(id);if(el)el.classList.add('active');if(id==='history')render()}
 function clearScript(){document.getElementById('script').value='';stopSpeaking()}
+function generateDraft(){
+ const topic=document.getElementById('topic').value;const duration=Number(document.getElementById('duration').value);
+ const drafts={
+ 'Gratitude envers Allah':[
+ 'Parfois, nous attendons un grand événement pour être heureux, alors que nous oublions les bienfaits déjà présents dans notre vie. La santé, le souffle, une nouvelle journée et la possibilité de faire le bien sont des raisons de remercier Allah. Même dans les difficultés, prenons le temps de reconnaître ce que nous avons. Dire Alhamdoulillah ne signifie pas que tout est facile : cela nous rappelle de garder un cœur reconnaissant. Aujourd’hui, remercions Allah avec nos paroles, mais aussi par nos actions et notre bonté envers les autres.',
+ 'Alhamdoulillah pour le souffle, pour la vie et pour chaque occasion de recommencer. Nous remarquons parfois ce qui nous manque et oublions les bienfaits qui nous entourent. La gratitude ne veut pas dire que nous n’avons aucun problème. Elle nous aide à ne pas laisser les problèmes effacer tous les bienfaits. Prenons un instant aujourd’hui pour remercier Allah sincèrement et faisons un petit acte de bonté. Qu’Allah nous accorde des cœurs reconnaissants.'
+ ],
+ 'La prière':[
+ 'La prière est un moment pour nous arrêter, nous recentrer et nous tourner vers Allah. Même lorsque nos journées sont chargées, ne laissons pas les distractions prendre toute la place dans notre cœur. Si nous avons pris du retard, revenons à la prière au lieu de désespérer. Faisons l’effort de préparer notre journée autour de nos prières, et non l’inverse. Qu’Allah nous aide à être réguliers et à accomplir nos prières avec sincérité.',
+ 'Il y a des jours où le cœur est fatigué et l’esprit rempli de soucis. Pourtant, la prière reste un rendez-vous précieux avec Allah. Ne cherchons pas la perfection avant de commencer : faisons l’effort, revenons lorsque nous avons faibli et demandons l’aide d’Allah. Chaque pas vers une meilleure régularité compte. Qu’Allah facilite nos prières et nous accorde la sincérité.'
+ ],
+ 'La patience dans les épreuves':[
+ 'Si tu traverses une épreuve, ne pense pas que ta difficulté résume toute ta vie. Certains jours demandent plus de patience que d’autres. Prends les moyens possibles, demande conseil à une personne de confiance et adresse tes invocations à Allah. La patience ne signifie pas accepter l’injustice sans agir : elle peut aussi consister à avancer avec sagesse, sans perdre espoir. Qu’Allah apaise les cœurs éprouvés et nous accorde la force de faire ce qui est juste.',
+ 'Tout ne se règle pas en un jour. Lorsque l’épreuve dure, avance étape par étape et n’aie pas honte de demander de l’aide. La patience n’interdit ni les larmes ni la recherche de solutions. Elle nous encourage à garder espoir et à agir avec sagesse. Qu’Allah accorde le soulagement à ceux qui traversent une période difficile.'
+ ],
+ 'Le repentir':[
+ 'Nous faisons tous des erreurs, mais une erreur ne doit pas nous pousser à abandonner le bien. Prenons le temps de reconnaître nos torts, de demander pardon à Allah et, lorsque nous avons blessé quelqu’un, de chercher à réparer ce que nous pouvons. Le repentir sincère s’accompagne d’un effort pour changer. Ne laisse pas la honte te convaincre qu’il est trop tard pour revenir vers Allah. Fais aujourd’hui un pas sincère vers le bien.',
+ 'Le retour vers Allah commence par un cœur sincère et la volonté de changer. Si tu as commis une faute, ne la minimise pas, mais ne désespère pas non plus. Demande pardon, éloigne-toi de ce qui t’entraîne vers cette faute et répare le tort causé lorsque c’est possible. Qu’Allah nous guide vers un repentir sincère et nous aide à persévérer dans le bien.'
+ ],
+ 'Le respect des parents':[
+ 'La bonté envers les parents se manifeste aussi dans les gestes simples : écouter avec respect, aider lorsque nous le pouvons et choisir des paroles douces. Les relations familiales peuvent parfois être compliquées. Respecter ne signifie pas qu’il faut accepter les violences ou renoncer à demander de l’aide face à une situation dangereuse. Essayons de parler avec sagesse, de faire le bien dans la mesure du possible et de demander à Allah de guider nos familles.',
+ 'Un mot doux, un service rendu ou un appel pour prendre des nouvelles peuvent apporter beaucoup. La bonté envers les parents se construit au quotidien, dans la patience et le respect. Si une situation familiale est difficile, cherchons une manière sûre et sage d’agir. Qu’Allah nous aide à faire preuve de bonté et à apaiser les cœurs.'
+ ],
+ 'Rappel du vendredi':[
+ 'En ce vendredi, prenons un instant pour renouveler notre intention, multiplier les invocations et nous rappeler l’importance de la prière. Éloignons-nous autant que possible des paroles qui blessent et des disputes inutiles. Un rappel n’a de valeur que s’il nous encourage aussi à améliorer notre comportement. Que ce vendredi soit une occasion de nous rapprocher d’Allah, de faire le bien et de demander pardon avec sincérité.',
+ 'Le vendredi est une occasion de nous recentrer sur notre foi et nos actes. Prenons du temps pour la prière, les invocations et un comportement bienveillant envers ceux qui nous entourent. Avant de partager un rappel, vérifions sa source afin de transmettre une information juste. Qu’Allah accepte nos bonnes œuvres et nous guide vers ce qui Lui plaît.'
+ ],
+ 'La confiance en Allah':[
+ 'Faire confiance à Allah ne signifie pas rester sans agir. Nous faisons les efforts possibles, nous cherchons les bons conseils, puis nous remettons le résultat à Allah. Il y a des choses que nous ne contrôlons pas, mais nous pouvons choisir nos actions, notre patience et notre sincérité. Si tu attends une réponse ou traverses une période d’incertitude, avance avec sagesse et garde espoir. Qu’Allah nous guide vers ce qui est bon pour nous.',
+ 'Parfois, nous voulons connaître toute la suite avant de faire le premier pas. Pourtant, nous pouvons avancer avec les moyens dont nous disposons et demander la guidance d’Allah. La confiance n’empêche pas de planifier : elle nous aide à ne pas croire que tout dépend uniquement de nous. Fais aujourd’hui le pas raisonnable que tu peux faire, puis confie le résultat à Allah.'
+ ],
+ 'La bienveillance':[
+ 'La bienveillance peut commencer par un geste discret : écouter sans se moquer, aider sans humilier, ou choisir de ne pas répondre durement. Nous ne savons pas toujours ce que les autres traversent. Cela ne veut pas dire qu’il faut accepter les mauvais traitements, mais nous pouvons défendre nos limites sans chercher à blesser. Aujourd’hui, essayons d’être une source de douceur et de respect. Qu’Allah améliore notre comportement et purifie nos intentions.'
+ ]
+ };
+ let choices=drafts[topic]||drafts['La gratitude envers Allah'];let text=choices[Math.random()<.5?0:1]||choices[0];
+ if(duration===30)text=text.split(/(?<=[.!?])\s+/).slice(0,5).join(' ');
+ if(duration===60)text += ' Prenons ce rappel comme une invitation à faire un petit pas concret dès aujourd’hui, même si ce pas semble modeste.';
+ document.getElementById('script').value=text;
+ document.getElementById('title').value=({'Gratitude envers Allah':'Un cœur reconnaissant','La prière':'Ne néglige pas la prière','La patience dans les épreuves':'Avance avec patience','Le repentir':'Revenir vers Allah','Le respect des parents':'La bonté au quotidien','Rappel du vendredi':'Un rappel pour le vendredi','La confiance en Allah':'Fais ta part, puis confie le résultat à Allah','La bienveillance':'La force de la bienveillance'})[topic]||topic;
+ document.getElementById('voiceStatus').textContent='Brouillon préparé. Relis-le et ajuste-le avant de créer la voix.';
+}
 function speakScript(){
- if(!('speechSynthesis'in window)||!('SpeechSynthesisUtterance'in window)){alert("La lecture vocale n'est pas disponible. Essaie Chrome à jour.");return}
- const txt=document.getElementById('script').value.trim();if(!txt){alert("Écris d'abord le texte du rappel.");return}
- window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='fr-FR';u.rate=.92;u.pitch=1.08;
- const voices=window.speechSynthesis.getVoices();const fr=voices.filter(v=>/^fr([-_]|$)/i.test(v.lang));const chosen=fr.find(v=>/female|femme|audrey|amelie|julie|marie|celine|lea|hortense|denise/i.test(v.name));u.voice=chosen||fr[0]||null;
- u.onstart=()=>document.getElementById('voiceStatus').textContent='Lecture en cours avec la voix française disponible sur ton téléphone.';
- u.onend=()=>document.getElementById('voiceStatus').textContent='Lecture terminée.';
- u.onerror=()=>document.getElementById('voiceStatus').textContent='Échec de la lecture. Vérifie les voix françaises du téléphone.';
- window.speechSynthesis.speak(u)
+ if(!('speechSynthesis'in window)||!('SpeechSynthesisUtterance'in window)){alert('La lecture vocale n’est pas disponible. Essaie Chrome à jour.');return}
+ const txt=document.getElementById('script').value.trim();if(!txt){alert('Écris d’abord le texte du rappel.');return}
+ window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='fr-FR';u.rate=.92;u.pitch=1.05;
+ const voices=window.speechSynthesis.getVoices();const fr=voices.filter(v=>/^fr([-_]|$)/i.test(v.lang));const chosen=fr.find(v=>/female|femme|audrey|amelie|julie|marie|celine|léa|lea|hortense|denise/i.test(v.name));u.voice=chosen||fr[0]||null;
+ u.onstart=()=>document.getElementById('voiceStatus').textContent='Lecture en cours. Cette écoute ne crée pas de fichier audio.';u.onend=()=>document.getElementById('voiceStatus').textContent='Lecture terminée.';u.onerror=()=>document.getElementById('voiceStatus').textContent='Échec de la lecture. Vérifie les voix françaises du téléphone.';window.speechSynthesis.speak(u)
 }
 function stopSpeaking(){if('speechSynthesis'in window)window.speechSynthesis.cancel();const el=document.getElementById('voiceStatus');if(el)el.textContent='Lecture arrêtée.'}
 async function copyScriptForTTS(){
  const txt=document.getElementById('script').value.trim();if(!txt){alert('Écris d’abord le script.');return}
- try{await navigator.clipboard.writeText(txt);document.getElementById('voiceStatus').textContent='Script copié ! Ouvre TTSMaker, colle le texte, choisis Français et une voix féminine, puis télécharge le nouvel audio.'}
- catch(e){const ta=document.getElementById('script');ta.focus();ta.select();try{document.execCommand('copy');document.getElementById('voiceStatus').textContent='Script copié. Si le message ne s’affiche pas, sélectionne le texte et copie-le manuellement.'}catch(err){alert('Sélectionne le script et copie-le manuellement.');}}
+ try{await navigator.clipboard.writeText(txt);document.getElementById('voiceStatus').textContent='Script copié ! Dans TTSMaker, colle-le, choisis Français et une voix féminine, convertis et télécharge le nouvel audio.'}
+ catch(e){const ta=document.getElementById('script');ta.focus();ta.select();try{document.execCommand('copy');document.getElementById('voiceStatus').textContent='Si la copie n’a pas fonctionné, le texte est sélectionné : choisis Copier dans le menu du téléphone.'}catch(err){alert('Sélectionne le script puis choisis Copier.');}}
 }
-function openTTSMaker(){window.open('https://ttsmaker.com/fra','_blank','noopener');document.getElementById('voiceStatus').textContent='TTSMaker est ouvert. Colle le script actuel, convertis-le en audio, télécharge-le puis reviens ici pour sélectionner ce fichier.'}
+function openTTSMaker(){window.open('https://ttsmaker.com/fra','_blank','noopener');document.getElementById('voiceStatus').textContent='TTSMaker ouvert : colle le script actuel, convertis-le, télécharge le fichier, puis reviens ici.'}
 document.getElementById('voiceAudio').addEventListener('change',function(){
- const f=this.files[0],el=document.getElementById('audioStatus');
- if(!f){el.textContent='Aucun audio sélectionné.';return}
- el.textContent='Audio choisi : '+f.name+'. Vérifie que tu viens de le créer à partir du script affiché ci-dessus.';
+ const f=this.files[0],el=document.getElementById('audioStatus'),player=document.getElementById('audioCheck');
+ if(selectedAudioUrl){URL.revokeObjectURL(selectedAudioUrl);selectedAudioUrl=null}
+ if(!f){el.textContent='Aucun audio sélectionné.';player.classList.add('hidden');return}
+ selectedAudioUrl=URL.createObjectURL(f);player.src=selectedAudioUrl;player.classList.remove('hidden');el.textContent='Audio choisi : '+f.name+'. Écoute-le pour confirmer que les paroles correspondent au script du projet.';
 });
+function clearAudio(){document.getElementById('voiceAudio').value='';document.getElementById('audioStatus').textContent='Aucun audio sélectionné.';const a=document.getElementById('audioCheck');a.pause();a.removeAttribute('src');a.classList.add('hidden');if(selectedAudioUrl)URL.revokeObjectURL(selectedAudioUrl);selectedAudioUrl=null}
 function prepare(){
  const title=document.getElementById('title').value.trim(),topic=document.getElementById('topic').value,script=document.getElementById('script').value.trim(),duration=Number(document.getElementById('duration').value);
  if(!title||!script){alert('Ajoute un titre et un script.');return}
- const p={id:Date.now(),title,topic,script,duration,status:'À valider',createdAt:new Date().toISOString()};projects.unshift(p);saveProjects();render();renderPreview(p);document.getElementById('notice').textContent='Projet préparé. Relis le texte et valide-le avant de créer la vidéo.'
+ const p={id:Date.now(),title,topic,script,duration,status:'À valider',createdAt:new Date().toISOString()};projects.unshift(p);latestProjectId=p.id;saveProjects();render();renderPreview(p);document.getElementById('voiceStatus').textContent='Projet enregistré. Crée ensuite la voix à partir de ce script précis.';document.getElementById('preview').scrollIntoView({behavior:'smooth',block:'start'})
 }
 function renderPreview(p){
- const preview=document.getElementById('preview');preview.innerHTML='';const box=document.createElement('div');box.className='card';
- const h=document.createElement('h2');h.textContent=p.title;box.appendChild(h);
- const d=document.createElement('p');d.textContent='Thème : '+p.topic+' · '+p.duration+' secondes';box.appendChild(d);
- const t=document.createElement('p');t.textContent=p.script;box.appendChild(t);
+ latestProjectId=p.id;const preview=document.getElementById('preview');preview.innerHTML='';const box=document.createElement('div');box.className='card';
+ const h=document.createElement('h2');h.textContent='Aperçu : '+p.title;box.appendChild(h);const d=document.createElement('p');d.textContent='Thème : '+p.topic+' · '+p.duration+' secondes';box.appendChild(d);const t=document.createElement('p');t.textContent=p.script;box.appendChild(t);
  const status=document.createElement('p');status.className='small';status.textContent='Statut : '+p.status;box.appendChild(status);
  const validate=document.createElement('button');validate.textContent=p.status==='À valider'?'Je valide ce script':'Script déjà validé';validate.disabled=p.status!=='À valider';
- validate.onclick=()=>{p.status='Script validé';saveProjects();status.textContent='Script validé. Tu peux créer la vidéo.';validate.disabled=true;render();addVideoButton(box,p)};
- box.appendChild(validate);if(p.status==='Script validé'||p.status==='Vidéo créée')addVideoButton(box,p);preview.appendChild(box)
+ validate.onclick=()=>{p.status='Script validé';saveProjects();status.textContent='Script validé. Vérifie la voix importée, puis crée la vidéo.';validate.disabled=true;render();addVideoButton(box,p)};box.appendChild(validate);if(p.status==='Script validé'||p.status==='Vidéo créée')addVideoButton(box,p);preview.appendChild(box)
 }
-function addVideoButton(box,p){if(box.querySelector('[data-video]'))return;const b=document.createElement('button');b.dataset.video='1';b.style.marginTop='12px';b.textContent='🎬 Créer la vidéo animée';b.onclick=()=>createVideo(p);box.appendChild(b);const hint=document.createElement('p');hint.className='small';hint.textContent='Avant de créer la vidéo, sélectionne un audio créé à partir de ce script précis. Sinon, la vidéo sera silencieuse.';box.appendChild(hint)}
+function addVideoButton(box,p){if(box.querySelector('[data-video]'))return;const b=document.createElement('button');b.dataset.video='1';b.style.marginTop='12px';b.textContent='🎬 Créer la vidéo verticale';b.onclick=()=>createVideo(p);box.appendChild(b);const hint=document.createElement('p');hint.className='small';hint.textContent='La vidéo utilise l’audio actuellement sélectionné. Vérifie qu’il correspond exactement au script de ce projet.';box.appendChild(hint)}
+function wrapWords(ctx,text,maxWidth){const words=text.split(/\s+/);const lines=[];let line='';for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);return lines}
 async function createVideo(p){
  if(p.status!=='Script validé'&&p.status!=='Vidéo créée'){alert('Valide le script avant de créer la vidéo.');return}
  const file=document.getElementById('voiceAudio').files[0]||null;
- if(!file){if(!confirm('Aucun fichier audio sélectionné. La vidéo sera silencieuse. Veux-tu continuer ?'))return}
- else if(!confirm('As-tu bien créé cet audio à partir du script exact affiché pour ce projet ? Si tu as gardé un ancien audio, la voix dira l’ancien texte.'))return;
+ if(!file){alert('Importe d’abord un fichier audio créé à partir du script. Pour éviter une vidéo muette, cette version exige un audio.');return}
+ if(!confirm('As-tu écouté l’audio et vérifié qu’il correspond au script de ce projet ?'))return;
  if(!HTMLCanvasElement.prototype.captureStream||!window.MediaRecorder){alert('Ton navigateur ne permet pas de créer cette vidéo. Essaie Chrome à jour.');return}
- const canvas=document.createElement('canvas');canvas.width=720;canvas.height=1280;
- const ctx=canvas.getContext('2d'),stream=canvas.captureStream(24);let audio=null,audioCtx=null,audioUrl=null,audioDuration=0;
- if(file){
-  try{
-   audioUrl=URL.createObjectURL(file);audio=new Audio();audio.src=audioUrl;audio.preload='auto';
-   await new Promise((resolve,reject)=>{audio.onloadedmetadata=resolve;audio.onerror=()=>reject(Error('Audio illisible'));audio.load()});
-   audioDuration=Number.isFinite(audio.duration)?audio.duration:0;
-   audioCtx=new(window.AudioContext||window.webkitAudioContext)();const source=audioCtx.createMediaElementSource(audio),dest=audioCtx.createMediaStreamDestination();source.connect(dest);source.connect(audioCtx.destination);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t))
-  }catch(e){alert("Fichier audio illisible. Essaie un MP3, M4A ou WAV.");stream.getTracks().forEach(t=>t.stop());if(audioCtx)audioCtx.close().catch(()=>{});if(audioUrl)URL.revokeObjectURL(audioUrl);return}
- }
- let mime='video/webm;codecs=vp9';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm;codecs=vp8';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm';
- let recorder;try{recorder=new MediaRecorder(stream,{mimeType:mime})}catch(e){alert('Impossible de créer la vidéo dans ce navigateur.');stream.getTracks().forEach(t=>t.stop());if(audioCtx)audioCtx.close().catch(()=>{});if(audioUrl)URL.revokeObjectURL(audioUrl);return}
- const chunks=[],chosen=Math.min(Math.max(Number(p.duration)||30,10),60),seconds=file&&audioDuration>0?Math.min(Math.max(audioDuration,10),60):chosen,total=Math.round(seconds*24);let frame=0;
- const lines=[];let line='';ctx.font='29px Arial';String(p.script||'').split(/\s+/).forEach(w=>{const test=line?line+' '+w:w;if(ctx.measureText(test).width>580&&line){lines.push(line);line=w}else line=test});if(line)lines.push(line);
- const shown=lines.slice(0,12),title=String(p.title||'Un rappel pour le cœur'),topic=String(p.topic||'Rappel islamique');
- const scenes=[{sky:'#17152f',mid:'#45336d',ground:'#93664f',accent:'#f7d995'},{sky:'#142b40',mid:'#397080',ground:'#547b68',accent:'#ffe1a0'},{sky:'#35204b',mid:'#80517d',ground:'#d09564',accent:'#fff0bd'},{sky:'#101d35',mid:'#344b72',ground:'#516b65',accent:'#f8df9b'}];
- function mosque(x,base,s){ctx.save();ctx.translate(x,base);ctx.scale(s,s);ctx.fillStyle='rgba(12,15,35,.48)';ctx.fillRect(-115,-110,230,110);ctx.beginPath();ctx.arc(0,-110,72,Math.PI,0);ctx.fill();ctx.fillRect(-160,-85,30,85);ctx.fillRect(130,-85,30,85);ctx.beginPath();ctx.moveTo(-160,-85);ctx.lineTo(-145,-120);ctx.lineTo(-130,-85);ctx.fill();ctx.beginPath();ctx.moveTo(130,-85);ctx.lineTo(145,-120);ctx.lineTo(160,-85);ctx.fill();ctx.fillRect(-15,-220,30,110);ctx.beginPath();ctx.arc(0,-220,15,Math.PI,0);ctx.fill();ctx.beginPath();ctx.moveTo(0,-265);ctx.lineTo(-10,-235);ctx.lineTo(10,-235);ctx.closePath();ctx.fill();ctx.restore()}
+ const canvas=document.createElement('canvas');canvas.width=720;canvas.height=1280;const ctx=canvas.getContext('2d');const stream=canvas.captureStream(24);let audio=null,audioCtx=null,audioUrl=null;
+ try{audioUrl=URL.createObjectURL(file);audio=new Audio();audio.src=audioUrl;audio.preload='auto';await new Promise((resolve,reject)=>{audio.onloadedmetadata=resolve;audio.onerror=()=>reject(Error('Audio illisible'));audio.load()})}catch(e){alert('Fichier audio illisible. Essaie un MP3, M4A ou WAV.');stream.getTracks().forEach(t=>t.stop());if(audioUrl)URL.revokeObjectURL(audioUrl);return}
+ const audioDuration=Number.isFinite(audio.duration)?audio.duration:0;if(!audioDuration||audioDuration===Infinity){alert('La durée de l’audio est inconnue. Essaie un autre fichier audio.');stream.getTracks().forEach(t=>t.stop());URL.revokeObjectURL(audioUrl);return}
+ try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();const source=audioCtx.createMediaElementSource(audio);const dest=audioCtx.createMediaStreamDestination();source.connect(dest);source.connect(audioCtx.destination);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t))}catch(e){alert('Impossible de préparer la piste audio sur ce navigateur. Essaie Chrome à jour.');stream.getTracks().forEach(t=>t.stop());if(audioCtx)audioCtx.close().catch(()=>{});URL.revokeObjectURL(audioUrl);return}
+ let mime='video/webm;codecs=vp9';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm;codecs=vp8';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm';let recorder;
+ try{recorder=new MediaRecorder(stream,{mimeType:mime})}catch(e){alert('Impossible de créer la vidéo dans ce navigateur.');stream.getTracks().forEach(t=>t.stop());audioCtx.close().catch(()=>{});URL.revokeObjectURL(audioUrl);return}
+ const chunks=[];const seconds=Math.min(Math.max(audioDuration,1),180);const total=Math.ceil(seconds*24);let frame=0;const words=(p.script||'').split(/\s+/).filter(Boolean);const scenes=[];const target=Math.max(5,Math.ceil(words.length/(seconds/3.5)));for(let i=0;i<words.length;i+=target)scenes.push(words.slice(i,i+target).join(' '));if(!scenes.length)scenes.push(p.script);
+ const palette=[['#17152f','#45336d','#93664f','#f7d995'],['#142b40','#397080','#547b68','#ffe1a0'],['#35204b','#80517d','#d09564','#fff0bd'],['#101d35','#344b72','#516b65','#f8df9b']];
  function draw(){
-  const prog=frame/total,idx=Math.min(3,Math.floor(prog*4)),sc=scenes[idx],g=ctx.createLinearGradient(0,0,100,1280);g.addColorStop(0,sc.sky);g.addColorStop(.58,sc.mid);g.addColorStop(1,sc.ground);ctx.fillStyle=g;ctx.fillRect(0,0,720,1280);
-  for(let i=0;i<35;i++){const x=(i*137+43)%720,y=(i*191+75)%410,z=1.5+Math.sin(frame/12+i)*1.2;ctx.fillStyle='rgba(255,255,255,.65)';ctx.beginPath();ctx.arc(x,y,Math.max(.5,z),0,Math.PI*2);ctx.fill()}
-  const oy=265+Math.sin(frame/30)*10,night=idx===0||idx===3;ctx.fillStyle=sc.accent;ctx.globalAlpha=.85;ctx.beginPath();ctx.arc(night?530:550,oy,43,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
-  if(night){ctx.fillStyle=sc.sky;ctx.beginPath();ctx.arc(550,oy-14,39,0,Math.PI*2);ctx.fill()}
-  ctx.fillStyle='rgba(10,20,35,.25)';ctx.beginPath();ctx.moveTo(0,760);ctx.quadraticCurveTo(190,590,370,760);ctx.quadraticCurveTo(550,630,720,745);ctx.lineTo(720,1280);ctx.lineTo(0,1280);ctx.closePath();ctx.fill();mosque(360,900,.85);
-  const shade=ctx.createLinearGradient(0,350,0,1050);shade.addColorStop(0,'rgba(10,10,30,.05)');shade.addColorStop(1,'rgba(10,10,30,.48)');ctx.fillStyle=shade;ctx.fillRect(0,350,720,700);
-  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=sc.accent;ctx.font='bold 28px Arial';ctx.fillText('☾ RAPPEL ISLAMIQUE ☽',360,105);
-  ctx.fillStyle='#fff';ctx.font='bold 43px Arial';let tl='',tls=[];title.split(/\s+/).forEach(w=>{const t=tl?tl+' '+w:w;if(ctx.measureText(t).width>590&&tl){tls.push(tl);tl=w}else tl=t});if(tl)tls.push(tl);tls.slice(0,3).forEach((t,i)=>ctx.fillText(t,360,405+i*55));
-  ctx.fillStyle=sc.accent;ctx.font='bold 25px Arial';ctx.fillText(topic.slice(0,42),360,590);ctx.fillStyle='#fff';ctx.font='28px Arial';const n=Math.max(1,Math.ceil(shown.length*Math.min(1,prog*1.8+.15)));shown.slice(0,n).forEach((t,i)=>ctx.fillText(t,360,670+i*39));
-  ctx.fillStyle=sc.accent;ctx.font='bold 23px Arial';ctx.fillText('Rappelle-toi et partage le bien',360,1135);ctx.fillStyle='rgba(255,255,255,.45)';ctx.fillRect(60,1200,600,7);ctx.fillStyle=sc.accent;ctx.fillRect(60,1200,600*prog,7);
+  const prog=Math.min(1,frame/total),idx=Math.min(3,Math.floor(prog*4)),sc=palette[idx];const g=ctx.createLinearGradient(0,0,0,1280);g.addColorStop(0,sc[0]);g.addColorStop(.58,sc[1]);g.addColorStop(1,sc[2]);ctx.fillStyle=g;ctx.fillRect(0,0,720,1280);
+  for(let i=0;i<40;i++){const x=(i*137+43)%720,y=(i*191+75)%440;ctx.fillStyle='rgba(255,255,255,.6)';ctx.beginPath();ctx.arc(x,y,1.4+Math.sin(frame/13+i)*.7,0,Math.PI*2);ctx.fill()}
+  const moonX=540,moonY=240+Math.sin(frame/28)*8;ctx.fillStyle=sc[3];ctx.beginPath();ctx.arc(moonX,moonY,42,0,Math.PI*2);ctx.fill();if(idx===0||idx===3){ctx.fillStyle=sc[0];ctx.beginPath();ctx.arc(moonX+16,moonY-13,38,0,Math.PI*2);ctx.fill()}
+  ctx.fillStyle='rgba(10,20,35,.35)';ctx.beginPath();ctx.moveTo(0,770);ctx.quadraticCurveTo(180,600,360,770);ctx.quadraticCurveTo(550,630,720,755);ctx.lineTo(720,1280);ctx.lineTo(0,1280);ctx.closePath();ctx.fill();
+  ctx.fillStyle='rgba(9,12,28,.55)';ctx.fillRect(255,760,210,160);ctx.beginPath();ctx.arc(360,760,105,Math.PI,0);ctx.fill();ctx.fillRect(330,650,60,110);ctx.beginPath();ctx.arc(360,650,30,Math.PI,0);ctx.fill();ctx.fillRect(115,800,32,120);ctx.beginPath();ctx.arc(131,800,16,Math.PI,0);ctx.fill();ctx.fillRect(573,800,32,120);ctx.beginPath();ctx.arc(589,800,16,Math.PI,0);ctx.fill();
+  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=sc[3];ctx.font='bold 25px Arial';ctx.fillText('☾ RAPPEL ISLAMIQUE ☽',360,105);
+  ctx.fillStyle='#fff';ctx.font='bold 42px Arial';const titleLines=wrapWords(ctx,p.title||'Rappel islamique',590).slice(0,3);titleLines.forEach((line,i)=>ctx.fillText(line,360,365+i*52));
+  ctx.fillStyle=sc[3];ctx.font='bold 23px Arial';ctx.fillText((p.topic||'Rappel islamique').slice(0,45),360,555);
+  const sceneIndex=Math.min(scenes.length-1,Math.floor(prog*scenes.length));const caption=scenes[sceneIndex]||p.script;ctx.fillStyle='rgba(13,12,30,.68)';ctx.fillRect(55,620,610,260);ctx.fillStyle='#fff';ctx.font='30px Arial';const capLines=wrapWords(ctx,caption,550).slice(0,6);capLines.forEach((line,i)=>ctx.fillText(line,360,675+i*39));
+  ctx.fillStyle=sc[3];ctx.font='bold 22px Arial';ctx.fillText('Rappelle-toi et partage le bien',360,1090);ctx.fillStyle='rgba(255,255,255,.4)';ctx.fillRect(60,1195,600,7);ctx.fillStyle=sc[3];ctx.fillRect(60,1195,600*prog,7);
   frame++;if(frame<total)requestAnimationFrame(draw);else recorder.stop()
  }
  recorder.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+ recorder.onerror=()=>alert('Une erreur est survenue pendant la création vidéo.');
  recorder.onstop=()=>{
-  stream.getTracks().forEach(t=>t.stop());if(audio)audio.pause();if(audioCtx)audioCtx.close().catch(()=>{});if(audioUrl)URL.revokeObjectURL(audioUrl);
-  const blob=new Blob(chunks,{type:'video/webm'});if(currentVideoUrl)URL.revokeObjectURL(currentVideoUrl);currentVideoUrl=URL.createObjectURL(blob);p.status='Vidéo créée';saveProjects();render();
-  const result=document.createElement('div');result.className='card';const h=document.createElement('h2');h.textContent='Ta vidéo est prête 🎉';result.appendChild(h);
-  const v=document.createElement('video');v.controls=true;v.playsInline=true;v.src=currentVideoUrl;result.appendChild(v);
+  stream.getTracks().forEach(t=>t.stop());audio.pause();audioCtx.close().catch(()=>{});URL.revokeObjectURL(audioUrl);
+  const blob=new Blob(chunks,{type:recorder.mimeType||'video/webm'});if(currentVideoUrl)URL.revokeObjectURL(currentVideoUrl);currentVideoUrl=URL.createObjectURL(blob);p.status='Vidéo créée';saveProjects();render();
+  const result=document.createElement('div');result.className='card';const h=document.createElement('h2');h.textContent='Ta vidéo est prête 🎉';result.appendChild(h);const v=document.createElement('video');v.controls=true;v.playsInline=true;v.src=currentVideoUrl;result.appendChild(v);
   const a=document.createElement('a');a.href=currentVideoUrl;a.download='autocreator-rappel-islamique.webm';a.textContent='📥 Télécharger la vidéo';a.style.display='inline-block';a.style.marginTop='14px';result.appendChild(a);
-  const note=document.createElement('p');note.className='small';note.textContent=file?'Vidéo avec la piste audio sélectionnée. Écoute-la attentivement avant publication.':'Vidéo sans voix intégrée. Ajoute un fichier audio pour obtenir une version parlée.';result.appendChild(note);
-  const preview=document.getElementById('preview');preview.appendChild(result);result.scrollIntoView({behavior:'smooth',block:'start'})
+  const note=document.createElement('p');note.className='small';note.textContent='Format WebM. Regarde la vidéo et écoute la voix jusqu’à la fin. Si tu veux un MP4, importe le fichier dans CapCut puis exporte en MP4.';result.appendChild(note);document.getElementById('preview').appendChild(result);result.scrollIntoView({behavior:'smooth',block:'start'})
  };
- recorder.start();
- if(audio&&audioCtx){try{await audioCtx.resume();await audio.play()}catch(e){alert("La lecture audio a été bloquée par le navigateur. Réessaie.")}}
- draw()
+ recorder.start();try{await audioCtx.resume();await audio.play()}catch(e){recorder.stop();alert('Le navigateur a bloqué la lecture audio. Essaie à nouveau et autorise la lecture.');return}draw()
 }
 function render(){
- const count=document.getElementById('count'),pending=document.getElementById('pending'),items=document.getElementById('items');
- if(count)count.textContent=projects.length;if(pending)pending.textContent=projects.filter(p=>p.status==='À valider').length;
- if(items){items.innerHTML='';if(!projects.length)items.textContent='Aucun projet pour le moment.';else projects.forEach(p=>{const item=document.createElement('div');item.className='item';const title=document.createElement('strong');title.textContent=p.title;item.appendChild(title);const info=document.createElement('p');info.textContent=p.topic+' · '+p.status;item.appendChild(info);const b=document.createElement('button');b.textContent='Ouvrir le projet';b.onclick=()=>{show('create');renderPreview(p)};item.appendChild(b);items.appendChild(item)})}
+ const count=document.getElementById('count'),pending=document.getElementById('pending'),items=document.getElementById('items');if(count)count.textContent=projects.length;if(pending)pending.textContent=projects.filter(p=>p.status==='À valider').length;
+ if(items){items.innerHTML='';if(!projects.length)items.textContent='Aucun projet pour le moment.';else projects.forEach(p=>{const item=document.createElement('div');item.className='item';const title=document.createElement('strong');title.textContent=p.title;item.appendChild(title);const info=document.createElement('p');info.className='small';info.textContent=p.topic+' · '+p.status+' · '+new Date(p.createdAt).toLocaleDateString('fr-FR');item.appendChild(info);const b=document.createElement('button');b.textContent='Ouvrir le projet';b.onclick=()=>{show('create');document.getElementById('title').value=p.title;document.getElementById('topic').value=p.topic;document.getElementById('script').value=p.script;document.getElementById('duration').value=String(p.duration);renderPreview(p)};item.appendChild(b);items.appendChild(item)})}
 }
+function exportProjects(){const blob=new Blob([JSON.stringify(projects,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='autocreator-projets.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function saveTime(){const time=document.getElementById('time').value,notice=document.getElementById('timeNotice');if(notice)notice.textContent='Préférence enregistrée pour cette session : '+time+'. Aucune publication automatique n’est programmée.'}
 render();
 </script>
